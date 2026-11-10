@@ -1,0 +1,64 @@
+{
+  "nav": {
+    "work": "ผลงาน",
+    "about": "เกี่ยวกับโน้ต",
+    "contact": "ทักทาย",
+    "switchLang": "EN"
+  },
+  "hero": {
+    "headline": "ตรรกะชัด หัวใจนุ่ม",
+    "subhead": "โน้ต Software Engineer ที่ดูแลงานได้ตั้งแต่ user flow จนถึง backend",
+    "ctaPrimary": "ดูผลงาน",
+    "ctaSecondary": "ทักโน้ต",
+    "hint3dPointer": "ขยับเมาส์ดูสิ",
+    "hint3dTouch": "แตะเล่นได้เลย",
+    "alt3dFallback": "ภาพกราฟิกสามมิติประกอบหน้าแรก"
+  },
+  "marquee": {
+    "items": "React · TypeScript · Node.js · Go · PostgreSQL · Tailwind CSS · Playwright · Figma",
+    "ariaLabel": "เทคโนโลยีที่โน้ตใช้"
+  },
+  "loading": "แป๊บนึงนะ",
+  "work": {
+    "title": "ผลงาน",
+    "subtitle": "งานจริง โจทย์จริง โค้ดจริง",
+    "cardCta": "ดูเคส →"
+  },
+  "caseStudy": {
+    "problem": "โจทย์",
+    "role": "โน้ตทำอะไร",
+    "stack": "stack ที่ใช้",
+    "approach": "คิดยังไง ทำยังไง",
+    "outcome": "ผลที่ได้",
+    "viewGithub": "ดูโค้ดบน GitHub",
+    "tryDemo": "ลองเล่นเดโม",
+    "nextProject": "เคสต่อไป"
+  },
+  "about": {
+    "intro": "โน้ตเป็น Software Engineer ที่ ODDS ทำงานในทีม Scrum ทั้ง UX/UI, frontend และ backend จบวิศวะคอมฯ เกียรตินิยม จาก มทส.",
+    "downloadCv": "โหลด CV (ไทย)"
+  },
+  "contact": {
+    "title": "มีงานน่าสนใจ? ทักมาได้เลย",
+    "name": "ชื่อ",
+    "email": "อีเมล",
+    "message": "อยากคุยเรื่องอะไร",
+    "submit": "ส่งเลย",
+    "sending": "กำลังส่ง…",
+    "status": {
+      "ok": "ได้รับแล้ว ขอบคุณนะ เดี๋ยวโน้ตตอบกลับเร็วๆ นี้",
+      "invalid_input": "มีบางช่องยังไม่ถูก ลองดูช่องสีแดงอีกที",
+      "captcha_failed": "ยืนยันว่าเป็นคนไม่ผ่าน ลองอีกรอบนะ",
+      "rate_limited": "ส่งถี่ไปนิด พักสักครู่แล้วค่อยลองใหม่",
+      "send_failed": "ส่งไม่ออก ลองอีกครั้ง หรืออีเมลหาโน้ตตรงๆ ได้เลย",
+      "offline": "เน็ตหลุดอยู่ ต่อเน็ตแล้วลองส่งใหม่นะ"
+    },
+    "fields": {
+      "name": "ใส่ชื่อด้วยนะ (ไม่เกิน 100 ตัวอักษร)",
+      "email": "อีเมลดูแปลกๆ ลองเช็กอีกที",
+      "messageTooShort": "เล่าเพิ่มอีกนิด อย่างน้อย 10 ตัวอักษร",
+      "messageTooLong": "ยาวเกิน 5,000 ตัวอักษร ย่อลงหน่อยนะ"
+    }
+  },
+  "footer": "ออกแบบและเขียนโค้ดโดยโน้ต © 2026"
+}

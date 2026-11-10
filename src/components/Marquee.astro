@@ -1,0 +1,51 @@
+---
+import { type Locale, createTranslator } from '@/i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = createTranslator(locale);
+
+const items = t('marquee.items');
+const ariaLabel = t('marquee.ariaLabel');
+
+const itemList = items.split(' · ');
+---
+
+<div
+  class="marquee-wrapper full-bleed border-y py-4"
+  style="border-color: var(--color-line); background-color: var(--color-accent);"
+>
+  {/* Accessible list for screen readers */}
+  <div class="sr-only">
+    <p id="marquee-label">{ariaLabel}:</p>
+    <ul aria-labelledby="marquee-label">
+      {itemList.map((item: string) => <li>{item}</li>)}
+    </ul>
+  </div>
+
+  {/* Visual marquee - aria-hidden since the content is duplicated above */}
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span
+        class="marquee-content whitespace-nowrap px-4 font-display font-semibold text-on-accent"
+      >
+        {items}
+      </span>
+      <span
+        class="marquee-content whitespace-nowrap px-4 font-display font-semibold text-on-accent"
+      >
+        {items}
+      </span>
+    </div>
+  </div>
+</div>
+
+<style>
+  .marquee-content {
+    display: inline-block;
+    padding-right: 4rem;
+  }
+</style>

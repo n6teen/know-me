@@ -1,0 +1,9 @@
+---
+import { defaultLocale } from '@/i18n';
+
+const acceptLanguage = Astro.request.headers.get('accept-language') || '';
+const prefersThai = acceptLanguage.toLowerCase().includes('th');
+const targetLocale = prefersThai ? 'th' : defaultLocale;
+
+return Astro.redirect(`/${targetLocale}/`, 302);
+---

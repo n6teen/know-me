@@ -1,0 +1,82 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { type Locale, createTranslator, getLocalizedPath } from '@/i18n';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+  slug: string;
+  locale: Locale;
+  size: 'large' | 'small';
+}
+
+const { project, slug, locale, size } = Astro.props;
+const t = createTranslator(locale);
+const { title, summary, role, stack } = project.data;
+
+const href = getLocalizedPath(`/work/${slug}`, locale);
+const isLarge = size === 'large';
+---
+
+<article class="hover:bg-line/30 duration-DEFAULT group h-full bg-surface transition-colors">
+  <a href={href} class="block h-full p-6 lg:p-8" aria-label={`${title} - ${t('work.cardCta')}`}>
+    <div
+      class={`flex flex-col h-full ${isLarge ? 'min-h-[280px] lg:min-h-[320px]' : 'min-h-[200px]'}`}
+    >
+      <header class="mb-4">
+        <h3 class={`font-display mb-2 ${isLarge ? 'text-h2' : 'text-h3'}`}>
+          {title}
+        </h3>
+        <p class="line-clamp-2 text-sm text-muted lg:text-base">
+          {summary}
+        </p>
+      </header>
+
+      <div class="mt-auto space-y-4">
+        <div
+          class="card-details duration-DEFAULT opacity-100 transition-opacity group-hover:opacity-100 lg:opacity-0"
+        >
+          <p class="mb-3 line-clamp-2 text-sm text-muted">
+            {role}
+          </p>
+
+          <div class="flex flex-wrap gap-2">
+            {
+              stack.slice(0, isLarge ? 6 : 4).map((tech: string) => (
+                <span
+                  class="px-3 py-1 text-xs text-on-accent"
+                  style="background-color: var(--color-accent);"
+                >
+                  {tech}
+                </span>
+              ))
+            }
+            {
+              stack.length > (isLarge ? 6 : 4) && (
+                <span
+                  class="px-3 py-1 text-xs text-on-accent"
+                  style="background-color: var(--color-accent);"
+                >
+                  +{stack.length - (isLarge ? 6 : 4)}
+                </span>
+              )
+            }
+          </div>
+        </div>
+
+        <div
+          class="flex items-center gap-2 text-sm font-medium text-accent-text transition-all duration-fast group-hover:gap-3"
+        >
+          <span>{t('work.cardCta')}</span>
+        </div>
+      </div>
+    </div>
+  </a>
+</article>
+
+<style>
+  @media (hover: none) {
+    .card-details {
+      opacity: 1 !important;
+    }
+  }
+</style>
