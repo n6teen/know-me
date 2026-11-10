@@ -41,7 +41,7 @@ const smallItems: ProjectItem[] = smallProjects.map((project: Project, index: nu
 
 <section id="work" class="py-24 lg:py-32" aria-labelledby="work-heading">
   <div class="container mb-12 lg:mb-16">
-    <header class="reveal">
+    <header data-reveal>
       <h2 id="work-heading" class="mb-4 font-display text-h2">
         {t('work.title')}
       </h2>
@@ -58,7 +58,8 @@ const smallItems: ProjectItem[] = smallProjects.map((project: Project, index: nu
       {
         largeItems.map((item: ProjectItem, index: number) => (
           <div
-            class="reveal border-b lg:border-r"
+            data-reveal
+            class="border-b lg:border-r"
             style={`
               transition-delay: ${item.delay}ms;
               border-color: var(--color-line);
@@ -76,7 +77,8 @@ const smallItems: ProjectItem[] = smallProjects.map((project: Project, index: nu
       {
         smallItems.map((item: ProjectItem, index: number) => (
           <div
-            class="reveal border-b md:border-r"
+            data-reveal
+            class="border-b md:border-r"
             style={`
               transition-delay: ${item.delay}ms;
               border-color: var(--color-line);

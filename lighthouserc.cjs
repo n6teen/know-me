@@ -5,9 +5,10 @@ module.exports = {
       url: ['http://localhost/en/', 'http://localhost/th/'],
       numberOfRuns: 3,
       settings: {
-        preset: 'desktop',
         formFactor: 'mobile',
         throttling: {
+          rttMs: 150,
+          throughputKbps: 1638.4,
           cpuSlowdownMultiplier: 4,
         },
         screenEmulation: {

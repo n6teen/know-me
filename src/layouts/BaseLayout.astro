@@ -5,6 +5,8 @@ import { type Locale, getLocaleFromUrl, getAlternateUrl } from '@/i18n';
 import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro';
 import MotionInit from '@/components/MotionInit.astro';
+import spaceGroteskFontUrl from '@fontsource/space-grotesk/files/space-grotesk-latin-600-normal.woff2?url';
+import kanitFontUrl from '@fontsource/kanit/files/kanit-thai-800-normal.woff2?url';
 
 interface Props {
   title: string;
@@ -25,6 +27,7 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="generator" content={Astro.generator} />
+    <script is:inline>document.documentElement.classList.add('js');</script>
 
     <title>{title}</title>
     <meta name="description" content={description} />
@@ -63,11 +66,20 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
 
     <link
       rel="preload"
-      href="/@fontsource/space-grotesk/files/space-grotesk-latin-600-normal.woff2"
+      href={spaceGroteskFontUrl}
       as="font"
       type="font/woff2"
       crossorigin
     />
+    {locale === 'th' && (
+      <link
+        rel="preload"
+        href={kanitFontUrl}
+        as="font"
+        type="font/woff2"
+        crossorigin
+      />
+    )}
 
     <ClientRouter />
   </head>

@@ -47,7 +47,7 @@ const nextSlug = nextProject?.id.split('/')[0];
       <header class="mb-12 lg:mb-16">
         <a
           href={getLocalizedPath('/', locale) + '#work'}
-          class="mb-8 inline-flex items-center gap-2 text-muted transition-colors hover:text-accent"
+          class="mb-8 inline-flex items-center gap-2 text-muted transition-colors hover:text-accent-text"
         >
           <svg
             width="20"
@@ -63,17 +63,17 @@ const nextSlug = nextProject?.id.split('/')[0];
           {t('nav.work')}
         </a>
 
-        <h1 class="reveal mb-6 font-display text-hero font-bold">
+        <h1 data-reveal class="mb-6 font-display text-hero font-bold">
           {title}
         </h1>
 
-        <p class="reveal max-w-3xl text-h3 text-muted" style="transition-delay: 100ms;">
+        <p data-reveal class="max-w-3xl text-h3 text-muted" style="transition-delay: 100ms;">
           {summary}
         </p>
       </header>
 
       <div class="grid-layout mb-16">
-        <aside class="reveal col-span-12 space-y-8 lg:col-span-4" style="transition-delay: 200ms;">
+        <aside data-reveal class="col-span-12 space-y-8 lg:col-span-4" style="transition-delay: 200ms;">
           <div>
             <h2 class="mb-3 text-sm font-semibold uppercase tracking-wide text-muted">
               {t('caseStudy.role')}
@@ -106,7 +106,7 @@ const nextSlug = nextProject?.id.split('/')[0];
                   {metrics.map((metric: { label: string; value: string }) => (
                     <div>
                       <dt class="text-sm text-muted">{metric.label}</dt>
-                      <dd class="font-display text-h3 font-bold text-accent">{metric.value}</dd>
+                      <dd class="font-display text-h3 font-bold text-accent-text">{metric.value}</dd>
                     </div>
                   ))}
                 </dl>
@@ -143,7 +143,8 @@ const nextSlug = nextProject?.id.split('/')[0];
         </aside>
 
         <div
-          class="reveal col-span-12 lg:col-span-7 lg:col-start-6"
+          data-reveal
+          class="col-span-12 lg:col-span-7 lg:col-start-6"
           style="transition-delay: 300ms;"
         >
           <div class="prose">
@@ -161,7 +162,7 @@ const nextSlug = nextProject?.id.split('/')[0];
             >
               <div>
                 <span class="mb-2 block text-sm text-muted">{t('caseStudy.nextProject')}</span>
-                <span class="font-display text-h3 font-semibold transition-colors group-hover:text-accent">
+                <span class="font-display text-h3 font-semibold transition-colors group-hover:text-accent-text">
                   {nextProject.data.title}
                 </span>
               </div>
@@ -172,7 +173,7 @@ const nextSlug = nextProject?.id.split('/')[0];
                 fill="none"
                 stroke="currentColor"
                 stroke-width="2"
-                class="text-muted transition-all group-hover:translate-x-2 group-hover:text-accent"
+                class="text-muted transition-all group-hover:translate-x-2 group-hover:text-accent-text"
                 aria-hidden="true"
               >
                 <polyline points="9 18 15 12 9 6" />
