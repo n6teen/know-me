@@ -1,12 +1,10 @@
 ---
 import { ClientRouter } from 'astro:transitions';
 import '../styles/global.css';
-import { type Locale, getLocaleFromUrl, getAlternateUrl } from '@/i18n';
 import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro';
 import MotionInit from '@/components/MotionInit.astro';
 import spaceGroteskFontUrl from '@fontsource/space-grotesk/files/space-grotesk-latin-600-normal.woff2?url';
-import kanitFontUrl from '@fontsource/kanit/files/kanit-thai-800-normal.woff2?url';
 
 interface Props {
   title: string;
@@ -17,12 +15,11 @@ interface Props {
 
 const { title, description, image = '/og-image.png', noindex = false } = Astro.props;
 
-const locale = getLocaleFromUrl(Astro.url) as Locale;
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <!doctype html>
-<html lang={locale}>
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
@@ -33,25 +30,13 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
     <meta name="description" content={description} />
 
     <link rel="canonical" href={canonicalUrl.href} />
-    <link
-      rel="alternate"
-      hreflang="en"
-      href={new URL(getAlternateUrl(Astro.url, 'en'), Astro.site).href}
-    />
-    <link
-      rel="alternate"
-      hreflang="th"
-      href={new URL(getAlternateUrl(Astro.url, 'th'), Astro.site).href}
-    />
-    <link rel="alternate" hreflang="x-default" href={new URL('/en/', Astro.site).href} />
 
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalUrl.href} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={new URL(image, Astro.site).href} />
-    <meta property="og:locale" content={locale === 'th' ? 'th_TH' : 'en_US'} />
-    <meta property="og:locale:alternate" content={locale === 'th' ? 'en_US' : 'th_TH'} />
+    <meta property="og:locale" content="en_US" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:url" content={canonicalUrl.href} />
@@ -71,30 +56,21 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
       type="font/woff2"
       crossorigin
     />
-    {locale === 'th' && (
-      <link
-        rel="preload"
-        href={kanitFontUrl}
-        as="font"
-        type="font/woff2"
-        crossorigin
-      />
-    )}
 
     <ClientRouter />
   </head>
   <body class="safe-area-inset">
     <a href="#main-content" class="skip-link">
-      {locale === 'th' ? 'ข้ามไปยังเนื้อหาหลัก' : 'Skip to main content'}
+      Skip to main content
     </a>
 
-    <Header locale={locale} />
+    <Header />
 
     <main id="main-content" tabindex="-1">
       <slot />
     </main>
 
-    <Footer locale={locale} />
+    <Footer />
 
     <MotionInit />
   </body>

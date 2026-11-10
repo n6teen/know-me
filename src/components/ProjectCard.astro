@@ -1,25 +1,27 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import { type Locale, createTranslator, getLocalizedPath } from '@/i18n';
+import { createTranslator } from '@/i18n';
 
 interface Props {
   project: CollectionEntry<'projects'>;
   slug: string;
-  locale: Locale;
   size: 'large' | 'small';
 }
 
-const { project, slug, locale, size } = Astro.props;
-const t = createTranslator(locale);
+const { project, slug, size } = Astro.props;
+const t = createTranslator();
 const { title, summary, role, stack, badges } = project.data;
 
-const href = getLocalizedPath(`/work/${slug}`, locale);
+const href = `/work/${slug}`;
 const isLarge = size === 'large';
 
 const badgeLabels: Record<string, string> = {
   new: t('work.badges.new'),
   production: t('work.badges.production'),
 };
+
+const hasStack = stack && stack.length > 0;
+const hasBadges = badges && badges.length > 0;
 ---
 
 <article class="group h-full bg-surface hover:bg-line/30 transition-colors duration-DEFAULT">
@@ -30,7 +32,7 @@ const badgeLabels: Record<string, string> = {
   >
     <div class={`flex flex-col h-full ${isLarge ? 'min-h-[280px] lg:min-h-[320px]' : 'min-h-[200px]'}`}>
       <header class="mb-4">
-        {badges && badges.length > 0 && (
+        {hasBadges && (
           <div class="mb-3">
             <span 
               class="inline-block px-2 py-1 text-xs font-medium text-on-accent"
@@ -54,26 +56,26 @@ const badgeLabels: Record<string, string> = {
             {role}
           </p>
 
-          <div class="flex flex-wrap gap-2">
-            {
-              stack.slice(0, isLarge ? 6 : 4).map((tech: string) => (
+          {hasStack && (
+            <div class="flex flex-wrap gap-2">
+              {stack.slice(0, isLarge ? 6 : 4).map((tech: string) => (
                 <span 
                   class="px-3 py-1 text-xs text-on-accent"
                   style="background-color: var(--color-accent);"
                 >
                   {tech}
                 </span>
-              ))
-            }
-            {stack.length > (isLarge ? 6 : 4) && (
-              <span 
-                class="px-3 py-1 text-xs text-on-accent"
-                style="background-color: var(--color-accent);"
-              >
-                +{stack.length - (isLarge ? 6 : 4)}
-              </span>
-            )}
-          </div>
+              ))}
+              {stack.length > (isLarge ? 6 : 4) && (
+                <span 
+                  class="px-3 py-1 text-xs text-on-accent"
+                  style="background-color: var(--color-accent);"
+                >
+                  +{stack.length - (isLarge ? 6 : 4)}
+                </span>
+              )}
+            </div>
+          )}
         </div>
 
         <div class="flex items-center gap-2 text-accent-text font-medium text-sm group-hover:gap-3 group-focus-within:gap-3 transition-all duration-fast">

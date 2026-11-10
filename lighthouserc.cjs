@@ -1,8 +1,8 @@
 module.exports = {
   ci: {
     collect: {
-      staticDistDir: './dist',
-      url: ['http://localhost/en/', 'http://localhost/th/'],
+      staticDistDir: './dist/client',
+      url: ['http://localhost/', 'http://localhost/about', 'http://localhost/work/gig-and-co'],
       numberOfRuns: 3,
       settings: {
         formFactor: 'mobile',

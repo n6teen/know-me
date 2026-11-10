@@ -1,0 +1,14 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import AboutSection from '@/components/AboutSection.astro';
+
+const title = 'About — Supachalita Polnong';
+const description =
+  'software engineer at ODDS since 2025, in a scrum team covering UX/UI, frontend and backend. b.eng. computer engineering (honours), Suranaree University of Technology.';
+---
+
+<BaseLayout title={title} description={description}>
+  <div class="pt-24 lg:pt-32">
+    <AboutSection />
+  </div>
+</BaseLayout>

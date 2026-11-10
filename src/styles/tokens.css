@@ -35,8 +35,8 @@
   /* ═══════════════════════════════════════════════════════════════════════════
    * TYPOGRAPHY - Font Families
    * ═══════════════════════════════════════════════════════════════════════════ */
-  --font-display: 'Space Grotesk', 'Kanit', sans-serif;
-  --font-body: 'IBM Plex Sans Thai', sans-serif;
+  --font-display: 'Space Grotesk', system-ui, sans-serif;
+  --font-body: 'Space Grotesk', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 
   /* ═══════════════════════════════════════════════════════════════════════════
@@ -112,13 +112,6 @@
   --focus-ring-width: 2px;
   --focus-ring-offset: 2px;
   --focus-ring-color: var(--color-accent-text);
-}
-
-/* Thai language overrides - different line height and heavier heading weight */
-:root:lang(th),
-:lang(th) {
-  --lh-display: 1.25;
-  --heading-weight: 800;
 }
 
 /* Mobile gutter adjustment */

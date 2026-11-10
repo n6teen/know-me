@@ -7,11 +7,11 @@ const projects = defineCollection({
       title: z.string(),
       summary: z.string(),
       role: z.string(),
-      stack: z.array(z.string()),
+      stack: z.array(z.string()).optional().default([]),
       order: z.number(),
       size: z.enum(['large', 'small']),
       cover: image().optional(),
-      badges: z.array(z.enum(['new', 'production'])).optional(),
+      badges: z.array(z.enum(['new', 'production'])).optional().default([]),
       metrics: z
         .array(
           z.object({

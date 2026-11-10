@@ -1,14 +1,12 @@
 import en from './en.json';
-import th from './th.json';
 
-export type Locale = 'en' | 'th';
+export type Locale = 'en';
 
-export const locales: Locale[] = ['en', 'th'];
 export const defaultLocale: Locale = 'en';
 
 type Translations = typeof en;
 
-const translations: Record<Locale, Translations> = { en, th };
+const translations: Record<Locale, Translations> = { en };
 
 type PathsToStringProps<T> = T extends string
   ? []
@@ -45,29 +43,10 @@ function getNestedValue(obj: unknown, path: string): string {
   return typeof current === 'string' ? current : path;
 }
 
-export function createTranslator(locale: Locale) {
-  const dict = translations[locale];
+export function createTranslator(_locale?: Locale) {
+  const dict = translations.en;
 
   return function t(key: TranslationKey): string {
     return getNestedValue(dict, key);
   };
-}
-
-export function getLocaleFromUrl(url: URL): Locale {
-  const [, locale] = url.pathname.split('/');
-  if (locale === 'th' || locale === 'en') {
-    return locale;
-  }
-  return defaultLocale;
-}
-
-export function getAlternateUrl(url: URL, targetLocale: Locale): string {
-  const currentLocale = getLocaleFromUrl(url);
-  const pathWithoutLocale = url.pathname.replace(`/${currentLocale}`, '');
-  return `/${targetLocale}${pathWithoutLocale || '/'}`;
-}
-
-export function getLocalizedPath(path: string, locale: Locale): string {
-  const cleanPath = path.startsWith('/') ? path : `/${path}`;
-  return `/${locale}${cleanPath === '/' ? '' : cleanPath}`;
 }

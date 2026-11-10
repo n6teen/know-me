@@ -1,61 +1,16 @@
 ---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Hero from '@/components/Hero.astro';
+import WorkGrid from '@/components/WorkGrid.astro';
+import AboutSection from '@/components/AboutSection.astro';
+
+const title = 'Supachalita Polnong — Software Engineer';
+const description =
+  'software engineer at ODDS · react, typescript, node, go. building web products that balance user needs, business goals and maintainable code.';
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Redirecting...</title>
-    <noscript>
-      <meta http-equiv="refresh" content="0;url=/en/" />
-    </noscript>
-    <script is:inline>
-      (function() {
-        var langs = navigator.languages || [navigator.language || 'en'];
-        var prefersThai = langs.some(function(l) {
-          return l.toLowerCase().startsWith('th');
-        });
-        var target = prefersThai ? '/th/' : '/en/';
-        if (window.location.pathname === '/' || window.location.pathname === '') {
-          window.location.replace(target);
-        }
-      })();
-    </script>
-    <style>
-      body {
-        font-family: system-ui, sans-serif;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        min-height: 100vh;
-        margin: 0;
-        background: #0a0a0b;
-        color: #e6edf3;
-      }
-      a {
-        color: #7b93ff;
-        text-decoration: none;
-        padding: 0.5rem 1rem;
-        border: 1px solid #232b36;
-        border-radius: 999px;
-        margin: 0.5rem;
-        transition: border-color 0.2s;
-      }
-      a:hover {
-        border-color: #7b93ff;
-      }
-    </style>
-  </head>
-  <body>
-    <noscript>
-      <p>Redirecting to English...</p>
-      <p>If not redirected, choose a language:</p>
-      <nav>
-        <a href="/en/">English</a>
-        <a href="/th/">ภาษาไทย</a>
-      </nav>
-    </noscript>
-  </body>
-</html>
+<BaseLayout title={title} description={description}>
+  <Hero />
+  <WorkGrid />
+  <AboutSection />
+</BaseLayout>

@@ -1,13 +1,7 @@
 ---
-import { type Locale, createTranslator } from '@/i18n';
-import Marquee from './Marquee.astro';
+import { createTranslator } from '@/i18n';
 
-interface Props {
-  locale: Locale;
-}
-
-const { locale } = Astro.props;
-const t = createTranslator(locale);
+const t = createTranslator();
 ---
 
 <section
@@ -29,7 +23,7 @@ const t = createTranslator(locale);
           <a href="#work" class="btn btn-primary">
             {t('hero.ctaPrimary')}
           </a>
-          <a href="#contact" class="btn btn-secondary">
+          <a href="/cv/cv-en.pdf" download class="btn btn-secondary">
             {t('hero.ctaSecondary')}
           </a>
         </div>
@@ -42,7 +36,6 @@ const t = createTranslator(locale);
           role="img"
           aria-label={t('hero.alt3dFallback')}
         >
-          {/* Glow effect behind the 3D slot */}
           <div
             class="absolute inset-0 -z-10 opacity-30 blur-3xl"
             style="background: radial-gradient(circle at center, var(--color-glow) 0%, transparent 70%);"
@@ -89,7 +82,8 @@ const t = createTranslator(locale);
     </div>
   </div>
 
-  <Marquee locale={locale} />
+  <!-- Full-bleed 1px border (replaces marquee) -->
+  <div class="full-bleed border-t" style="border-color: var(--color-line);"></div>
 
   <div class="absolute bottom-24 left-1/2 -translate-x-1/2 animate-bounce">
     <svg

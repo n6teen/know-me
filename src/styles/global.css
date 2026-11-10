@@ -1,13 +1,10 @@
 /* Design tokens - edit tokens.css for visual changes */
 @import './tokens.css';
 
-/* Fonts - Space Grotesk (display 600/700 max avail), Kanit (Thai fallback 600/800), IBM Plex Sans Thai (body), JetBrains Mono */
+/* Fonts - Space Grotesk (display + body), JetBrains Mono (code) */
+@import '@fontsource/space-grotesk/400.css';
 @import '@fontsource/space-grotesk/600.css';
 @import '@fontsource/space-grotesk/700.css';
-@import '@fontsource/kanit/600.css';
-@import '@fontsource/kanit/800.css';
-@import '@fontsource/ibm-plex-sans-thai/400.css';
-@import '@fontsource/ibm-plex-sans-thai/600.css';
 @import '@fontsource/jetbrains-mono/400.css';
 
 @tailwind base;

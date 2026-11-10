@@ -16,29 +16,16 @@ export default defineConfig({
   site: siteUrl,
   output: 'static',
   adapter: vercel({
-    webAnalytics: { enabled: true },
+    webAnalytics: { enabled: false },
   }),
-  integrations: [
-    tailwind(),
-    react(),
-    mdx(),
-    sitemap({
-      i18n: {
-        defaultLocale: 'en',
-        locales: {
-          en: 'en',
-          th: 'th',
-        },
-      },
-    }),
-  ],
-  i18n: {
-    defaultLocale: 'en',
-    locales: ['en', 'th'],
-    routing: {
-      prefixDefaultLocale: true,
-      redirectToDefaultLocale: false,
-    },
+  integrations: [tailwind(), react(), mdx(), sitemap()],
+  redirects: {
+    '/en': { status: 308, destination: '/' },
+    '/en/about': { status: 308, destination: '/about' },
+    '/en/work/[slug]': { status: 308, destination: '/work/[slug]' },
+    '/th': { status: 308, destination: '/' },
+    '/th/about': { status: 308, destination: '/about' },
+    '/th/work/[slug]': { status: 308, destination: '/work/[slug]' },
   },
   prefetch: {
     prefetchAll: true,

@@ -1,13 +1,8 @@
 ---
-import { type Locale, createTranslator } from '@/i18n';
+import { createTranslator } from '@/i18n';
 import ContactSection from './ContactSection.astro';
 
-interface Props {
-  locale: Locale;
-}
-
-const { locale } = Astro.props;
-const t = createTranslator(locale);
+const t = createTranslator();
 
 const socialLinks = [
   {
@@ -23,7 +18,7 @@ const socialLinks = [
 ];
 ---
 
-<ContactSection locale={locale} />
+<ContactSection />
 
 <footer class="border-t border-line py-8" role="contentinfo">
   <div class="container">
@@ -70,7 +65,7 @@ const socialLinks = [
           type="button"
           id="email-btn"
           class="group flex items-center gap-2 text-muted transition-colors duration-fast hover:text-accent-text"
-          aria-label={locale === 'th' ? 'คัดลอกอีเมล' : 'Copy email'}
+          aria-label="Copy email"
         >
           <svg
             width="24"
@@ -88,7 +83,7 @@ const socialLinks = [
             <polyline points="22,6 12,13 2,6"></polyline>
           </svg>
           <span id="email-tooltip" class="text-xs opacity-0 transition-opacity duration-fast">
-            {locale === 'th' ? 'คัดลอกแล้ว!' : 'Copied!'}
+            Copied!
           </span>
         </button>
       </div>

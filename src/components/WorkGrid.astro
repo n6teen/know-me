@@ -1,18 +1,11 @@
 ---
 import { getCollection, type CollectionEntry } from 'astro:content';
-import { type Locale, createTranslator } from '@/i18n';
+import { createTranslator } from '@/i18n';
 import ProjectCard from './ProjectCard.astro';
 
-interface Props {
-  locale: Locale;
-}
+const t = createTranslator();
 
-const { locale } = Astro.props;
-const t = createTranslator(locale);
-
-const allProjects = await getCollection('projects', ({ id }: { id: string }) => {
-  return id.endsWith(`/${locale}.mdx`);
-});
+const allProjects = await getCollection('projects');
 
 type Project = CollectionEntry<'projects'>;
 
@@ -66,7 +59,7 @@ const smallItems: ProjectItem[] = smallProjects.map((project: Project, index: nu
               ${index % 2 === 1 ? 'border-right: none;' : ''}
             `}
           >
-            <ProjectCard project={item.project} slug={item.slug} locale={locale} size="large" />
+            <ProjectCard project={item.project} slug={item.slug} size="large" />
           </div>
         ))
       }
@@ -85,7 +78,7 @@ const smallItems: ProjectItem[] = smallProjects.map((project: Project, index: nu
               ${index % 2 === 1 ? 'border-right: none;' : ''}
             `}
           >
-            <ProjectCard project={item.project} slug={item.slug} locale={locale} size="small" />
+            <ProjectCard project={item.project} slug={item.slug} size="small" />
           </div>
         ))
       }
@@ -107,7 +100,7 @@ const smallItems: ProjectItem[] = smallProjects.map((project: Project, index: nu
   }
 
   @media (min-width: 1024px) {
-    .grid.lg\\:grid-cols-2 > div:nth-last-child(2):nth-child(odd) {
+    .grid.lg\:grid-cols-2 > div:nth-last-child(2):nth-child(odd) {
       border-bottom: none;
     }
   }

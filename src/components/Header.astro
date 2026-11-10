@@ -1,18 +1,11 @@
 ---
-import { type Locale, createTranslator, getAlternateUrl, getLocalizedPath } from '@/i18n';
+import { createTranslator } from '@/i18n';
 
-interface Props {
-  locale: Locale;
-}
-
-const { locale } = Astro.props;
-const t = createTranslator(locale);
-const alternateLocale = locale === 'en' ? 'th' : 'en';
-const alternateUrl = getAlternateUrl(Astro.url, alternateLocale);
+const t = createTranslator();
 
 const navItems = [
-  { href: getLocalizedPath('/', locale) + '#work', label: t('nav.work') },
-  { href: getLocalizedPath('/about', locale), label: t('nav.about') },
+  { href: '/#work', label: t('nav.work') },
+  { href: '/about', label: t('nav.about') },
   { href: '#contact', label: t('nav.contact') },
 ];
 ---
@@ -23,12 +16,12 @@ const navItems = [
 >
   <nav
     class="container flex items-center justify-between py-4 lg:py-6"
-    aria-label={locale === 'th' ? 'เมนูหลัก' : 'Main navigation'}
+    aria-label="Main navigation"
   >
     <a
-      href={getLocalizedPath('/', locale)}
+      href="/"
       class="font-display text-h3 font-bold tracking-tight transition-colors duration-fast hover:text-accent-text"
-      aria-label={locale === 'th' ? 'หน้าแรก' : 'Home'}
+      aria-label="Home"
     >
       NOTE.
     </a>
@@ -49,40 +42,30 @@ const navItems = [
         }
       </ul>
 
-      <div class="flex items-center gap-4">
-        <a
-          href={alternateUrl}
-          class="px-2 py-1 text-sm font-medium text-muted transition-colors duration-fast hover:text-accent-text"
-          aria-label={locale === 'th' ? 'Switch to English' : 'เปลี่ยนเป็นภาษาไทย'}
+      <button
+        type="button"
+        id="mobile-menu-btn"
+        class="p-2 text-muted transition-colors hover:text-text md:hidden"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        aria-label="Open menu"
+      >
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
         >
-          {t('nav.switchLang')}
-        </a>
-
-        <button
-          type="button"
-          id="mobile-menu-btn"
-          class="p-2 text-muted transition-colors hover:text-text md:hidden"
-          aria-expanded="false"
-          aria-controls="mobile-menu"
-          aria-label={locale === 'th' ? 'เปิดเมนู' : 'Open menu'}
-        >
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
-          >
-            <line x1="3" y1="6" x2="21" y2="6"></line>
-            <line x1="3" y1="12" x2="21" y2="12"></line>
-            <line x1="3" y1="18" x2="21" y2="18"></line>
-          </svg>
-        </button>
-      </div>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
     </div>
   </nav>
 
