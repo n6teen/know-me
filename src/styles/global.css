@@ -167,16 +167,26 @@
   /*
    * Progressive reveal: content visible by default for accessibility.
    * Only hide elements when JS is available (.js class on <html>).
+   * Fallback: if JS fails to run reveals, content becomes visible after 1.5s.
    */
+  @keyframes reveal-fallback {
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
   .js [data-reveal] {
     opacity: 0;
     transform: translateY(30px);
+    animation: reveal-fallback 0s 1.5s forwards;
   }
 
   [data-reveal].revealed,
   .js [data-reveal].revealed {
     opacity: 1;
     transform: translateY(0);
+    animation: none;
     transition:
       opacity var(--duration-slow) var(--ease-smooth),
       transform var(--duration-slow) var(--ease-smooth);
@@ -186,6 +196,7 @@
     .js [data-reveal] {
       opacity: 1;
       transform: none;
+      animation: none;
     }
   }
 

@@ -109,7 +109,13 @@ const navItems = [
 </header>
 
 <script>
+  let headerCleanup: (() => void) | null = null;
+
   function initHeader() {
+    if (headerCleanup) {
+      headerCleanup();
+    }
+
     const header = document.getElementById('site-header');
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
@@ -150,16 +156,38 @@ const navItems = [
       }
     }
 
+    function handleLinkClick() {
+      closeMenu();
+    }
+
     window.addEventListener('scroll', updateHeader, { passive: true });
     mobileMenuBtn.addEventListener('click', toggleMenu);
 
-    mobileMenu.querySelectorAll('a').forEach((link) => {
-      link.addEventListener('click', closeMenu);
+    const menuLinks = mobileMenu.querySelectorAll('a');
+    menuLinks.forEach((link) => {
+      link.addEventListener('click', handleLinkClick);
     });
 
     updateHeader();
+
+    headerCleanup = () => {
+      window.removeEventListener('scroll', updateHeader);
+      mobileMenuBtn.removeEventListener('click', toggleMenu);
+      menuLinks.forEach((link) => {
+        link.removeEventListener('click', handleLinkClick);
+      });
+      if (isMenuOpen) {
+        mobileMenu.classList.add('translate-x-full');
+        document.body.style.overflow = '';
+      }
+    };
   }
 
-  initHeader();
   document.addEventListener('astro:page-load', initHeader);
+  document.addEventListener('astro:before-swap', () => {
+    if (headerCleanup) {
+      headerCleanup();
+      headerCleanup = null;
+    }
+  });
 </script>

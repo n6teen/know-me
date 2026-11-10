@@ -6,6 +6,7 @@ import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro';
 import MotionInit from '@/components/MotionInit.astro';
 import spaceGroteskFontUrl from '@fontsource/space-grotesk/files/space-grotesk-latin-600-normal.woff2?url';
+import kanitFontUrl from '@fontsource/kanit/files/kanit-thai-800-normal.woff2?url';
 
 interface Props {
   title: string;
@@ -70,6 +71,15 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
       type="font/woff2"
       crossorigin
     />
+    {locale === 'th' && (
+      <link
+        rel="preload"
+        href={kanitFontUrl}
+        as="font"
+        type="font/woff2"
+        crossorigin
+      />
+    )}
 
     <ClientRouter />
   </head>

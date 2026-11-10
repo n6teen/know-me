@@ -5,7 +5,12 @@ import sitemap from '@astrojs/sitemap';
 import vercel from '@astrojs/vercel';
 import tailwind from '@astrojs/tailwind';
 
-const siteUrl = process.env.PUBLIC_SITE_URL || process.env.SITE || 'https://example.com';
+const siteUrl =
+  process.env.PUBLIC_SITE_URL ||
+  process.env.SITE ||
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL
+    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+    : 'https://example.com');
 
 export default defineConfig({
   site: siteUrl,
