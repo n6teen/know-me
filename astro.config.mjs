@@ -5,8 +5,15 @@ import sitemap from '@astrojs/sitemap';
 import vercel from '@astrojs/vercel';
 import tailwind from '@astrojs/tailwind';
 
+const siteUrl =
+  process.env.PUBLIC_SITE_URL ||
+  process.env.SITE ||
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL
+    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+    : 'https://example.com');
+
 export default defineConfig({
-  site: 'https://note.dev',
+  site: siteUrl,
   output: 'static',
   adapter: vercel({
     webAnalytics: { enabled: true },
@@ -30,7 +37,7 @@ export default defineConfig({
     locales: ['en', 'th'],
     routing: {
       prefixDefaultLocale: true,
-      redirectToDefaultLocale: true,
+      redirectToDefaultLocale: false,
     },
   },
   prefetch: {

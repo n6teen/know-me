@@ -37,7 +37,7 @@ const socialLinks = [
               href={link.href}
               target="_blank"
               rel="noopener noreferrer"
-              class="text-muted transition-colors duration-fast hover:text-accent"
+              class="text-muted transition-colors duration-fast hover:text-accent-text"
               aria-label={link.name}
             >
               {link.icon === 'linkedin' && (
@@ -69,7 +69,7 @@ const socialLinks = [
         <button
           type="button"
           id="email-btn"
-          class="group flex items-center gap-2 text-muted transition-colors duration-fast hover:text-accent"
+          class="group flex items-center gap-2 text-muted transition-colors duration-fast hover:text-accent-text"
           aria-label={locale === 'th' ? 'คัดลอกอีเมล' : 'Copy email'}
         >
           <svg
@@ -97,28 +97,47 @@ const socialLinks = [
 </footer>
 
 <script>
+  let emailBtnCleanup: (() => void) | null = null;
+
   function initEmailButton() {
+    if (emailBtnCleanup) {
+      emailBtnCleanup();
+    }
+
     const emailBtn = document.getElementById('email-btn');
     const tooltip = document.getElementById('email-tooltip');
     if (!emailBtn || !tooltip) return;
 
     const emailParts = ['note', '.', '842545', '@', 'gmail', '.', 'com'];
 
-    emailBtn.addEventListener('click', async () => {
+    async function handleClick() {
       const email = emailParts.join('');
 
       try {
         await navigator.clipboard.writeText(email);
-        tooltip.style.opacity = '1';
-        setTimeout(() => {
-          tooltip.style.opacity = '0';
-        }, 2000);
+        if (tooltip) {
+          tooltip.style.opacity = '1';
+          setTimeout(() => {
+            if (tooltip) tooltip.style.opacity = '0';
+          }, 2000);
+        }
       } catch {
         window.location.href = `mailto:${email}`;
       }
-    });
+    }
+
+    emailBtn.addEventListener('click', handleClick);
+
+    emailBtnCleanup = () => {
+      emailBtn.removeEventListener('click', handleClick);
+    };
   }
 
-  initEmailButton();
   document.addEventListener('astro:page-load', initEmailButton);
+  document.addEventListener('astro:before-swap', () => {
+    if (emailBtnCleanup) {
+      emailBtnCleanup();
+      emailBtnCleanup = null;
+    }
+  });
 </script>

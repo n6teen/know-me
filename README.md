@@ -44,6 +44,10 @@ Create a `.env` file in the root directory (see `.env.example` for a template):
 PUBLIC_TURNSTILE_SITE_KEY=your_turnstile_site_key
 TURNSTILE_SECRET_KEY=your_turnstile_secret_key
 
+# Site URL for canonical links and sitemaps (e.g. https://yourdomain.com)
+# Used by Astro's site config for SEO, canonical URLs, and OG tags
+PUBLIC_SITE_URL=https://example.com
+
 # Upstash Redis - rate limiting for contact form (5 requests/hour/IP)
 # Create a database at: https://console.upstash.com/
 UPSTASH_REDIS_REST_URL=https://your-instance.upstash.io
@@ -58,15 +62,16 @@ CONTACT_TO_EMAIL=you@example.com
 CONTACT_FROM_EMAIL=onboarding@resend.dev  # Optional, defaults to onboarding@resend.dev
 ```
 
-| Variable                    | Required | Description                                                |
-| --------------------------- | -------- | ---------------------------------------------------------- |
-| `PUBLIC_TURNSTILE_SITE_KEY` | Yes      | Cloudflare Turnstile site key (public, used by frontend)   |
-| `TURNSTILE_SECRET_KEY`      | Yes      | Cloudflare Turnstile secret key (server-side verification) |
-| `UPSTASH_REDIS_REST_URL`    | Yes      | Upstash Redis REST API URL                                 |
-| `UPSTASH_REDIS_REST_TOKEN`  | Yes      | Upstash Redis REST API token                               |
-| `RESEND_API_KEY`            | Yes      | Resend API key for email delivery                          |
-| `CONTACT_TO_EMAIL`          | Yes      | Recipient email(s), comma-separated for multiple           |
-| `CONTACT_FROM_EMAIL`        | No       | Sender email address (defaults to `onboarding@resend.dev`) |
+| Variable                    | Required   | Description                                                |
+| --------------------------- | ---------- | ---------------------------------------------------------- |
+| `PUBLIC_TURNSTILE_SITE_KEY` | Yes        | Cloudflare Turnstile site key (public, used by frontend)   |
+| `TURNSTILE_SECRET_KEY`      | Yes        | Cloudflare Turnstile secret key (server-side verification) |
+| `PUBLIC_SITE_URL`           | Production | Full site URL for canonical links and OG tags              |
+| `UPSTASH_REDIS_REST_URL`    | Yes        | Upstash Redis REST API URL                                 |
+| `UPSTASH_REDIS_REST_TOKEN`  | Yes        | Upstash Redis REST API token                               |
+| `RESEND_API_KEY`            | Yes        | Resend API key for email delivery                          |
+| `CONTACT_TO_EMAIL`          | Yes        | Recipient email(s), comma-separated for multiple           |
+| `CONTACT_FROM_EMAIL`        | No         | Sender email address (defaults to `onboarding@resend.dev`) |
 
 ## Project Structure
 
