@@ -1,0 +1,14 @@
+{
+  "redirects": [
+    { "source": "/work/gigandco", "destination": "/work/gig-and-co", "permanent": true },
+    { "source": "/work/gigandco/", "destination": "/work/gig-and-co", "permanent": true },
+    { "source": "/en/work/gigandco", "destination": "/work/gig-and-co", "permanent": true },
+    { "source": "/en/work/gigandco/", "destination": "/work/gig-and-co", "permanent": true },
+    { "source": "/th/work/gigandco", "destination": "/work/gig-and-co", "permanent": true },
+    { "source": "/th/work/gigandco/", "destination": "/work/gig-and-co", "permanent": true },
+    { "source": "/en", "destination": "/", "permanent": true },
+    { "source": "/th", "destination": "/", "permanent": true },
+    { "source": "/en/:path*", "destination": "/:path*", "permanent": true },
+    { "source": "/th/:path*", "destination": "/:path*", "permanent": true }
+  ]
+}

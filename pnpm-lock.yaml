@@ -26,13 +26,7 @@ importers:
       '@astrojs/vercel':
         specifier: ^8.0.0
         version: 8.2.11(astro@5.18.2(@types/node@24.19.2)(@upstash/redis@1.41.0)(@vercel/functions@2.2.13)(jiti@1.21.7)(rollup@4.68.2)(typescript@5.9.3)(yaml@2.9.1))(react@19.3.1)(rollup@4.68.2)
-      '@fontsource/ibm-plex-sans-thai':
-        specifier: ^5.1.1
-        version: 5.3.0
       '@fontsource/jetbrains-mono':
-        specifier: ^5.1.1
-        version: 5.3.0
-      '@fontsource/kanit':
         specifier: ^5.1.1
         version: 5.3.0
       '@fontsource/space-grotesk':
@@ -646,14 +640,8 @@ packages:
     resolution: {integrity: sha512-d9zaMRSTIKDLhctzH12MtXvJKSSUhaHcjV+2Z+GK+EEY7XKpP5yR4x+N3TAcHTcu963nIr+TMcCb4DBCYX1z6Q==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
 
-  '@fontsource/ibm-plex-sans-thai@5.3.0':
-    resolution: {integrity: sha512-olXzgcA/CTk0PibqGMJrheml3/z8N9VzNLcHkzv9tCoBqnaMoxYYwZp4PZrDkPuOCUe1gW942e9f5fGOOlr3zg==}
-
   '@fontsource/jetbrains-mono@5.3.0':
     resolution: {integrity: sha512-fqDfB5I9f1p1TV486aUgB9t8zP84P0O1FtQR5Ol9vjwPy+S+EIGlVYm1cvj2W5shcZMTg2nZFdVMoH5wFu8a1A==}
-
-  '@fontsource/kanit@5.3.0':
-    resolution: {integrity: sha512-XrVxf5NWb8QLAEbQS2GYir3AY0WbOLr5Q80fWurnoFWXyc7CWvioGNPC2dxRGZKocMUXbwGhuK+sJqWkRLAWNA==}
 
   '@fontsource/space-grotesk@5.3.0':
     resolution: {integrity: sha512-ksnGizDPXIDuvqcTYTSrmZ+evx9sDlS8rp7+42BQ7wU+spt3twEoXfbJz672C+5CLg6VeUQwRy5RXshWb67LcQ==}
@@ -4167,11 +4155,7 @@ snapshots:
 
   '@eslint/js@8.57.1': {}
 
-  '@fontsource/ibm-plex-sans-thai@5.3.0': {}
-
   '@fontsource/jetbrains-mono@5.3.0': {}
-
-  '@fontsource/kanit@5.3.0': {}
 
   '@fontsource/space-grotesk@5.3.0': {}
 
