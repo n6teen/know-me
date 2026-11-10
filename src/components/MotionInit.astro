@@ -95,7 +95,9 @@
     initMotion();
   });
 
-  window.matchMedia('(prefers-reduced-motion: reduce)').addEventListener('change', handleReducedMotionChange);
+  window
+    .matchMedia('(prefers-reduced-motion: reduce)')
+    .addEventListener('change', handleReducedMotionChange);
 
   initMotion();
 </script>

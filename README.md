@@ -46,10 +46,10 @@ PUBLIC_TURNSTILE_SITE_KEY=your_turnstile_site_key
 PUBLIC_SITE_URL=https://example.com
 ```
 
-| Variable | Required | Description |
-| --- | --- | --- |
+| Variable                    | Required   | Description                                       |
+| --------------------------- | ---------- | ------------------------------------------------- |
 | `PUBLIC_TURNSTILE_SITE_KEY` | Production | Cloudflare Turnstile site key for spam protection |
-| `PUBLIC_SITE_URL` | Production | Full site URL for canonical links and OG tags |
+| `PUBLIC_SITE_URL`           | Production | Full site URL for canonical links and OG tags     |
 
 ## Project Structure
 
@@ -87,39 +87,43 @@ src/
 title: 'Project Title'
 summary: 'Short summary'
 role: 'Your role'
-stack: []  # Optional: technologies used
-order: 5   # Display order (lower = first)
-size: large  # 'large' or 'small' card size
-badges: []  # Optional: ['new', 'production']
+stack: [] # Optional: technologies used
+order: 5 # Display order (lower = first)
+size: large # 'large' or 'small' card size
+badges: [] # Optional: ['new', 'production']
 ---
 
 ## the problem
+
 ...
 
 ## my role
+
 ...
 
 ## how i did it
+
 ...
 
 ## what happened
+
 ...
 ```
 
 ### Content Schema
 
-| Field     | Type                      | Required | Description           |
-| --------- | ------------------------- | -------- | --------------------- |
-| `title`   | string                    | ✓        | Project title         |
-| `summary` | string                    | ✓        | Brief description     |
-| `role`    | string                    | ✓        | Your role             |
+| Field     | Type                      | Required | Description                    |
+| --------- | ------------------------- | -------- | ------------------------------ |
+| `title`   | string                    | ✓        | Project title                  |
+| `summary` | string                    | ✓        | Brief description              |
+| `role`    | string                    | ✓        | Your role                      |
 | `stack`   | string[]                  |          | Technologies (hidden if empty) |
-| `order`   | number                    | ✓        | Display order         |
-| `size`    | `'large'` \| `'small'`    | ✓        | Card size in grid     |
-| `badges`  | `('new'\|'production')[]` |          | Card badges (hidden if empty) |
-| `metrics` | `{label, value}[]`        |          | Key metrics (hidden if empty) |
-| `demoUrl` | url                       |          | Live demo URL         |
-| `repoUrl` | url                       |          | Repository URL        |
+| `order`   | number                    | ✓        | Display order                  |
+| `size`    | `'large'` \| `'small'`    | ✓        | Card size in grid              |
+| `badges`  | `('new'\|'production')[]` |          | Card badges (hidden if empty)  |
+| `metrics` | `{label, value}[]`        |          | Key metrics (hidden if empty)  |
+| `demoUrl` | url                       |          | Live demo URL                  |
+| `repoUrl` | url                       |          | Repository URL                 |
 
 ## Design Tokens
 
@@ -136,6 +140,7 @@ pnpm build       # Build
 ## CI/CD
 
 GitHub Actions runs on PRs:
+
 - Lint, Format check, Type check, Build
 - Lighthouse CI (Performance >= 90%, LCP <= 2.5s)
 

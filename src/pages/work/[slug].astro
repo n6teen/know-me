@@ -68,7 +68,11 @@ const nextSlug = nextProject?.id.split('/')[0];
       </header>
 
       <div class="grid-layout mb-16">
-        <aside data-reveal class="col-span-12 space-y-8 lg:col-span-4" style="transition-delay: 200ms;">
+        <aside
+          data-reveal
+          class="col-span-12 space-y-8 lg:col-span-4"
+          style="transition-delay: 200ms;"
+        >
           <div>
             <h2 class="mb-3 text-sm font-semibold uppercase tracking-wide text-muted">
               {t('caseStudy.role')}
@@ -76,58 +80,68 @@ const nextSlug = nextProject?.id.split('/')[0];
             <p class="text-text">{role}</p>
           </div>
 
-          {stack && stack.length > 0 && (
-            <div>
-              <h2 class="mb-3 text-sm font-semibold uppercase tracking-wide text-muted">
-                {t('caseStudy.stack')}
-              </h2>
-              <div class="flex flex-wrap gap-2">
-                {stack.map((tech: string) => (
-                  <span class="rounded-button border border-line bg-surface px-3 py-1 text-sm text-muted">
-                    {tech}
-                  </span>
-                ))}
+          {
+            stack && stack.length > 0 && (
+              <div>
+                <h2 class="mb-3 text-sm font-semibold uppercase tracking-wide text-muted">
+                  {t('caseStudy.stack')}
+                </h2>
+                <div class="flex flex-wrap gap-2">
+                  {stack.map((tech: string) => (
+                    <span class="rounded-button border border-line bg-surface px-3 py-1 text-sm text-muted">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
               </div>
-            </div>
-          )}
+            )
+          }
 
-          {metrics && metrics.length > 0 && (
-            <div>
-              <h2 class="mb-3 text-sm font-semibold uppercase tracking-wide text-muted">
-                Metrics
-              </h2>
-              <dl class="space-y-2">
-                {metrics.map((metric: { label: string; value: string }) => (
-                  <div>
-                    <dt class="text-sm text-muted">{metric.label}</dt>
-                    <dd class="font-display text-h3 font-bold text-accent-text">{metric.value}</dd>
-                  </div>
-                ))}
-              </dl>
-            </div>
-          )}
+          {
+            metrics && metrics.length > 0 && (
+              <div>
+                <h2 class="mb-3 text-sm font-semibold uppercase tracking-wide text-muted">
+                  Metrics
+                </h2>
+                <dl class="space-y-2">
+                  {metrics.map((metric: { label: string; value: string }) => (
+                    <div>
+                      <dt class="text-sm text-muted">{metric.label}</dt>
+                      <dd class="font-display text-h3 font-bold text-accent-text">
+                        {metric.value}
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+              </div>
+            )
+          }
 
           <div class="flex flex-wrap gap-4">
-            {repoUrl && (
-              <a
-                href={repoUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="btn btn-secondary text-sm"
-              >
-                {t('caseStudy.viewGithub')}
-              </a>
-            )}
-            {demoUrl && (
-              <a
-                href={demoUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="btn btn-primary text-sm"
-              >
-                {t('caseStudy.tryDemo')}
-              </a>
-            )}
+            {
+              repoUrl && (
+                <a
+                  href={repoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="btn btn-secondary text-sm"
+                >
+                  {t('caseStudy.viewGithub')}
+                </a>
+              )
+            }
+            {
+              demoUrl && (
+                <a
+                  href={demoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="btn btn-primary text-sm"
+                >
+                  {t('caseStudy.tryDemo')}
+                </a>
+              )
+            }
           </div>
         </aside>
 
@@ -142,33 +156,32 @@ const nextSlug = nextProject?.id.split('/')[0];
         </div>
       </div>
 
-      {nextProject && nextSlug && (
-        <nav class="border-t border-line pt-12" aria-label="Next project">
-          <a
-            href={`/work/${nextSlug}`}
-            class="group flex items-center justify-between"
-          >
-            <div>
-              <span class="mb-2 block text-sm text-muted">{t('caseStudy.nextProject')}</span>
-              <span class="font-display text-h3 font-semibold transition-colors group-hover:text-accent-text">
-                {nextProject.data.title}
-              </span>
-            </div>
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              class="text-muted transition-all group-hover:translate-x-2 group-hover:text-accent-text"
-              aria-hidden="true"
-            >
-              <polyline points="9 18 15 12 9 6" />
-            </svg>
-          </a>
-        </nav>
-      )}
+      {
+        nextProject && nextSlug && (
+          <nav class="border-t border-line pt-12" aria-label="Next project">
+            <a href={`/work/${nextSlug}`} class="group flex items-center justify-between">
+              <div>
+                <span class="mb-2 block text-sm text-muted">{t('caseStudy.nextProject')}</span>
+                <span class="font-display text-h3 font-semibold transition-colors group-hover:text-accent-text">
+                  {nextProject.data.title}
+                </span>
+              </div>
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                class="text-muted transition-all group-hover:translate-x-2 group-hover:text-accent-text"
+                aria-hidden="true"
+              >
+                <polyline points="9 18 15 12 9 6" />
+              </svg>
+            </a>
+          </nav>
+        )
+      }
     </div>
   </article>
 </BaseLayout>

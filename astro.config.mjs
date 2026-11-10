@@ -21,10 +21,14 @@ export default defineConfig({
   integrations: [tailwind(), react(), mdx(), sitemap()],
   redirects: {
     '/en': { status: 308, destination: '/' },
+    '/en/': { status: 308, destination: '/' },
     '/en/about': { status: 308, destination: '/about' },
+    '/en/about/': { status: 308, destination: '/about' },
     '/en/work/[slug]': { status: 308, destination: '/work/[slug]' },
     '/th': { status: 308, destination: '/' },
+    '/th/': { status: 308, destination: '/' },
     '/th/about': { status: 308, destination: '/about' },
+    '/th/about/': { status: 308, destination: '/about' },
     '/th/work/[slug]': { status: 308, destination: '/work/[slug]' },
   },
   prefetch: {

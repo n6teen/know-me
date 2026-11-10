@@ -11,7 +11,10 @@ const projects = defineCollection({
       order: z.number(),
       size: z.enum(['large', 'small']),
       cover: image().optional(),
-      badges: z.array(z.enum(['new', 'production'])).optional().default([]),
+      badges: z
+        .array(z.enum(['new', 'production']))
+        .optional()
+        .default([]),
       metrics: z
         .array(
           z.object({
