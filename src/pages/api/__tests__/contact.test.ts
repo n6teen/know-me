@@ -147,6 +147,46 @@ describe('POST /api/contact', () => {
       expect(response.status).toBe(400);
       expect(data.code).toBe('invalid_input');
     });
+
+    it('rejects null body', async () => {
+      const request = createRequest(null);
+      const response = await POST(createContext(request));
+      const data = await response.json();
+
+      expect(response.status).toBe(400);
+      expect(data.code).toBe('invalid_input');
+      expect(data.fields).toEqual({});
+    });
+
+    it('rejects array body', async () => {
+      const request = createRequest([1, 2, 3]);
+      const response = await POST(createContext(request));
+      const data = await response.json();
+
+      expect(response.status).toBe(400);
+      expect(data.code).toBe('invalid_input');
+      expect(data.fields).toEqual({});
+    });
+
+    it('rejects string body', async () => {
+      const request = createRequest('just a string');
+      const response = await POST(createContext(request));
+      const data = await response.json();
+
+      expect(response.status).toBe(400);
+      expect(data.code).toBe('invalid_input');
+      expect(data.fields).toEqual({});
+    });
+
+    it('rejects number body', async () => {
+      const request = createRequest(12345);
+      const response = await POST(createContext(request));
+      const data = await response.json();
+
+      expect(response.status).toBe(400);
+      expect(data.code).toBe('invalid_input');
+      expect(data.fields).toEqual({});
+    });
   });
 
   describe('input validation', () => {

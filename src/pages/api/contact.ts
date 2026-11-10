@@ -66,22 +66,28 @@ export const POST: APIRoute = async ({ request }) => {
     return jsonResponse({ code: 'invalid_input', fields: {} }, 400);
   }
 
-  let body: Record<string, unknown>;
+  let body: unknown;
   try {
     const text = await request.text();
     if (text.length > MAX_BODY_SIZE) {
       return jsonResponse({ code: 'invalid_input', fields: {} }, 400);
     }
-    body = JSON.parse(text) as Record<string, unknown>;
+    body = JSON.parse(text);
   } catch {
     return jsonResponse({ code: 'invalid_input', fields: {} }, 400);
   }
 
-  if (typeof body.website === 'string' && body.website.length > 0) {
+  if (body === null || typeof body !== 'object' || Array.isArray(body)) {
+    return jsonResponse({ code: 'invalid_input', fields: {} }, 400);
+  }
+
+  const bodyObj = body as Record<string, unknown>;
+
+  if (typeof bodyObj.website === 'string' && bodyObj.website.length > 0) {
     return jsonResponse({ code: 'ok' }, 200);
   }
 
-  const parsed = parseContactInput(body);
+  const parsed = parseContactInput(bodyObj);
   if (!parsed.success) {
     return jsonResponse({ code: 'invalid_input', fields: parsed.fields }, 400);
   }
