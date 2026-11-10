@@ -36,12 +36,37 @@ pnpm preview
 
 ### Environment Variables
 
-Create a `.env` file in the root directory:
+Create a `.env` file in the root directory (see `.env.example` for a template):
 
 ```env
-# Cloudflare Turnstile site key for contact form spam protection
+# Cloudflare Turnstile - spam protection for contact form
+# Get keys at: https://dash.cloudflare.com/?to=/:account/turnstile
 PUBLIC_TURNSTILE_SITE_KEY=your_turnstile_site_key
+TURNSTILE_SECRET_KEY=your_turnstile_secret_key
+
+# Upstash Redis - rate limiting for contact form (5 requests/hour/IP)
+# Create a database at: https://console.upstash.com/
+UPSTASH_REDIS_REST_URL=https://your-instance.upstash.io
+UPSTASH_REDIS_REST_TOKEN=your_upstash_rest_token
+
+# Resend - email delivery for contact form
+# Get API key at: https://resend.com/api-keys
+RESEND_API_KEY=re_your_api_key
+
+# Contact form email configuration
+CONTACT_TO_EMAIL=you@example.com
+CONTACT_FROM_EMAIL=onboarding@resend.dev  # Optional, defaults to onboarding@resend.dev
 ```
+
+| Variable                    | Required | Description                                                |
+| --------------------------- | -------- | ---------------------------------------------------------- |
+| `PUBLIC_TURNSTILE_SITE_KEY` | Yes      | Cloudflare Turnstile site key (public, used by frontend)   |
+| `TURNSTILE_SECRET_KEY`      | Yes      | Cloudflare Turnstile secret key (server-side verification) |
+| `UPSTASH_REDIS_REST_URL`    | Yes      | Upstash Redis REST API URL                                 |
+| `UPSTASH_REDIS_REST_TOKEN`  | Yes      | Upstash Redis REST API token                               |
+| `RESEND_API_KEY`            | Yes      | Resend API key for email delivery                          |
+| `CONTACT_TO_EMAIL`          | Yes      | Recipient email(s), comma-separated for multiple           |
+| `CONTACT_FROM_EMAIL`        | No       | Sender email address (defaults to `onboarding@resend.dev`) |
 
 ## Project Structure
 
@@ -166,19 +191,19 @@ Results and impact.
 
 ### Content Schema
 
-| Field     | Type                          | Required | Description                        |
-| --------- | ----------------------------- | -------- | ---------------------------------- |
-| `title`   | string                        | ✓        | Project title                      |
-| `summary` | string                        | ✓        | Brief description                  |
-| `role`    | string                        | ✓        | Your role/contributions            |
-| `stack`   | string[]                      | ✓        | Technologies used                  |
-| `order`   | number                        | ✓        | Display order                      |
-| `size`    | `'large'` \| `'small'`        | ✓        | Card size in grid                  |
-| `cover`   | image                         |          | Cover image                        |
-| `badges`  | `('new'\|'production')[]`     |          | Card badges (rendered on cards)    |
-| `metrics` | `{label, value}[]`            |          | Key metrics                        |
-| `demoUrl` | url                           |          | Live demo URL                      |
-| `repoUrl` | url                           |          | Repository URL                     |
+| Field     | Type                      | Required | Description                     |
+| --------- | ------------------------- | -------- | ------------------------------- |
+| `title`   | string                    | ✓        | Project title                   |
+| `summary` | string                    | ✓        | Brief description               |
+| `role`    | string                    | ✓        | Your role/contributions         |
+| `stack`   | string[]                  | ✓        | Technologies used               |
+| `order`   | number                    | ✓        | Display order                   |
+| `size`    | `'large'` \| `'small'`    | ✓        | Card size in grid               |
+| `cover`   | image                     |          | Cover image                     |
+| `badges`  | `('new'\|'production')[]` |          | Card badges (rendered on cards) |
+| `metrics` | `{label, value}[]`        |          | Key metrics                     |
+| `demoUrl` | url                       |          | Live demo URL                   |
+| `repoUrl` | url                       |          | Repository URL                  |
 
 ## Editing i18n Strings
 
@@ -207,8 +232,8 @@ The contact form POSTs to `/api/contact` with the following JSON body:
 
 ```typescript
 {
-  name: string; // User's name (max 100 chars)
-  email: string; // User's email
+  name: string; // User's name (1-100 chars)
+  email: string; // User's email (valid email format)
   message: string; // Message (10-5000 chars)
   turnstileToken: string; // Cloudflare Turnstile token
   locale: 'th' | 'en'; // Current page locale
@@ -216,15 +241,38 @@ The contact form POSTs to `/api/contact` with the following JSON body:
 }
 ```
 
-**Response codes:**
+**Response format:**
 
-- `ok` - Message sent successfully
-- `invalid_input` - Validation failed
-- `captcha_failed` - Turnstile verification failed
-- `rate_limited` - Too many requests
-- `send_failed` - Server error
+All responses are JSON with a `code` field:
 
-**Note:** The `/api/contact` endpoint is owned by the backend engineer and is NOT implemented in this PR. The Astro config uses `output: 'static'` with `@astrojs/vercel` adapter, allowing the backend to add `src/pages/api/contact.ts` with `export const prerender = false` later.
+| Status | Code             | Description                                  |
+| ------ | ---------------- | -------------------------------------------- |
+| 200    | `ok`             | Message sent successfully                    |
+| 400    | `invalid_input`  | Validation failed (includes `fields` object) |
+| 403    | `captcha_failed` | Turnstile verification failed                |
+| 429    | `rate_limited`   | Too many requests (5 per hour per IP)        |
+| 500    | `send_failed`    | Server error                                 |
+
+**Validation error response (400):**
+
+```json
+{
+  "code": "invalid_input",
+  "fields": {
+    "name": "required" | "too_long",
+    "email": "invalid",
+    "message": "too_short" | "too_long"
+  }
+}
+```
+
+**Security features:**
+
+- Honeypot field: If `website` is non-empty, returns 200 `{ code: 'ok' }` but does NOT send email
+- Rate limiting: 5 requests per hour per IP (sliding window via Upstash Redis)
+- Captcha: Server-side Cloudflare Turnstile verification
+- Input validation: Server-side validation with zod
+- HTML escaping: All user input is escaped in email HTML to prevent XSS
 
 ## Accessibility
 
