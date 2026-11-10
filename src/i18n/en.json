@@ -12,7 +12,7 @@
   "loading": "one sec…",
   "work": {
     "title": "SELECTED WORK",
-    "subtitle": "my role and stack on each project.",
+    "subtitle": "what i built and the part i owned.",
     "cardCta": "view case →",
     "badges": { "new": "new", "production": "in production" }
   },
