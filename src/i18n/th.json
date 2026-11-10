@@ -22,7 +22,11 @@
   "work": {
     "title": "ผลงาน",
     "subtitle": "งานจริง โจทย์จริง โค้ดจริง",
-    "cardCta": "ดูเคส →"
+    "cardCta": "ดูเคส →",
+    "badges": {
+      "new": "ใหม่",
+      "production": "ใช้งานจริง"
+    }
   },
   "caseStudy": {
     "problem": "โจทย์",

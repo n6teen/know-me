@@ -22,7 +22,11 @@
   "work": {
     "title": "SELECTED WORK",
     "subtitle": "real problems. real products. real code.",
-    "cardCta": "view case →"
+    "cardCta": "view case →",
+    "badges": {
+      "new": "new",
+      "production": "in production"
+    }
   },
   "caseStudy": {
     "problem": "the problem",

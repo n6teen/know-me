@@ -137,6 +137,9 @@ stack:
 order: 5 # Display order (lower = first)
 size: large # 'large' or 'small' card size
 cover: ./cover.png # Optional: cover image
+badges: # Optional: card badges
+  - new
+  - production
 metrics: # Optional: key metrics
   - label: 'Users'
     value: '10K+'
@@ -163,18 +166,19 @@ Results and impact.
 
 ### Content Schema
 
-| Field     | Type                   | Required | Description             |
-| --------- | ---------------------- | -------- | ----------------------- |
-| `title`   | string                 | ✓        | Project title           |
-| `summary` | string                 | ✓        | Brief description       |
-| `role`    | string                 | ✓        | Your role/contributions |
-| `stack`   | string[]               | ✓        | Technologies used       |
-| `order`   | number                 | ✓        | Display order           |
-| `size`    | `'large'` \| `'small'` | ✓        | Card size in grid       |
-| `cover`   | image                  |          | Cover image             |
-| `metrics` | `{label, value}[]`     |          | Key metrics             |
-| `demoUrl` | url                    |          | Live demo URL           |
-| `repoUrl` | url                    |          | Repository URL          |
+| Field     | Type                          | Required | Description                        |
+| --------- | ----------------------------- | -------- | ---------------------------------- |
+| `title`   | string                        | ✓        | Project title                      |
+| `summary` | string                        | ✓        | Brief description                  |
+| `role`    | string                        | ✓        | Your role/contributions            |
+| `stack`   | string[]                      | ✓        | Technologies used                  |
+| `order`   | number                        | ✓        | Display order                      |
+| `size`    | `'large'` \| `'small'`        | ✓        | Card size in grid                  |
+| `cover`   | image                         |          | Cover image                        |
+| `badges`  | `('new'\|'production')[]`     |          | Card badges (rendered on cards)    |
+| `metrics` | `{label, value}[]`            |          | Key metrics                        |
+| `demoUrl` | url                           |          | Live demo URL                      |
+| `repoUrl` | url                           |          | Repository URL                     |
 
 ## Editing i18n Strings
 
