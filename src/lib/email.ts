@@ -9,6 +9,11 @@ export function escapeHtml(text: string): string {
     .replace(/'/g, '&#039;');
 }
 
+export function stripControlChars(text: string): string {
+  // eslint-disable-next-line no-control-regex
+  return text.replace(/[\x00-\x1F\x7F]/g, '');
+}
+
 interface SendContactEmailParams {
   name: string;
   email: string;
@@ -62,11 +67,13 @@ ${escapedMessage}
 </html>
 `.trim();
 
+  const sanitizedName = stripControlChars(name);
+
   const { error } = await resend.emails.send({
     from: fromEmail,
     to: toEmails,
     replyTo: email,
-    subject: `Contact Form: ${name}`,
+    subject: `Contact Form: ${sanitizedName}`,
     html,
   });
 

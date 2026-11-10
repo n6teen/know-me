@@ -13,7 +13,7 @@ importers:
         version: 0.9.12(prettier-plugin-astro@0.14.1)(prettier@3.9.10)(typescript@5.9.3)
       '@astrojs/mdx':
         specifier: ^4.0.0
-        version: 4.3.14(astro@5.18.2(@types/node@24.19.2)(@vercel/functions@2.2.13)(jiti@1.21.7)(rollup@4.68.2)(typescript@5.9.3)(yaml@2.9.1))
+        version: 4.3.14(astro@5.18.2(@types/node@24.19.2)(@upstash/redis@1.41.0)(@vercel/functions@2.2.13)(jiti@1.21.7)(rollup@4.68.2)(typescript@5.9.3)(yaml@2.9.1))
       '@astrojs/react':
         specifier: ^4.0.0
         version: 4.4.2(@types/node@24.19.2)(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(jiti@1.21.7)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(yaml@2.9.1)
@@ -22,10 +22,10 @@ importers:
         version: 3.7.4
       '@astrojs/tailwind':
         specifier: ^6.0.2
-        version: 6.0.2(astro@5.18.2(@types/node@24.19.2)(@vercel/functions@2.2.13)(jiti@1.21.7)(rollup@4.68.2)(typescript@5.9.3)(yaml@2.9.1))(tailwindcss@3.4.19(yaml@2.9.1))
+        version: 6.0.2(astro@5.18.2(@types/node@24.19.2)(@upstash/redis@1.41.0)(@vercel/functions@2.2.13)(jiti@1.21.7)(rollup@4.68.2)(typescript@5.9.3)(yaml@2.9.1))(tailwindcss@3.4.19(yaml@2.9.1))
       '@astrojs/vercel':
         specifier: ^8.0.0
-        version: 8.2.11(astro@5.18.2(@types/node@24.19.2)(@vercel/functions@2.2.13)(jiti@1.21.7)(rollup@4.68.2)(typescript@5.9.3)(yaml@2.9.1))(react@19.3.1)(rollup@4.68.2)
+        version: 8.2.11(astro@5.18.2(@types/node@24.19.2)(@upstash/redis@1.41.0)(@vercel/functions@2.2.13)(jiti@1.21.7)(rollup@4.68.2)(typescript@5.9.3)(yaml@2.9.1))(react@19.3.1)(rollup@4.68.2)
       '@fontsource/ibm-plex-sans-thai':
         specifier: ^5.1.1
         version: 5.3.0
@@ -38,9 +38,15 @@ importers:
       '@fontsource/space-grotesk':
         specifier: ^5.1.0
         version: 5.3.0
+      '@upstash/ratelimit':
+        specifier: ^2.0.0
+        version: 2.2.0(@upstash/redis@1.41.0)
+      '@upstash/redis':
+        specifier: ^1.34.0
+        version: 1.41.0
       astro:
         specifier: ^5.0.0
-        version: 5.18.2(@types/node@24.19.2)(@vercel/functions@2.2.13)(jiti@1.21.7)(rollup@4.68.2)(typescript@5.9.3)(yaml@2.9.1)
+        version: 5.18.2(@types/node@24.19.2)(@upstash/redis@1.41.0)(@vercel/functions@2.2.13)(jiti@1.21.7)(rollup@4.68.2)(typescript@5.9.3)(yaml@2.9.1)
       gsap:
         specifier: ^3.12.5
         version: 3.15.1
@@ -53,9 +59,15 @@ importers:
       react-dom:
         specifier: ^19.0.0
         version: 19.3.1(react@19.3.1)
+      resend:
+        specifier: ^4.0.0
+        version: 4.8.0(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
       typescript:
         specifier: ^5.6.3
         version: 5.9.3
+      zod:
+        specifier: ^3.23.0
+        version: 3.25.76
     devDependencies:
       '@types/react':
         specifier: ^19.0.0
@@ -874,6 +886,13 @@ packages:
     resolution: {integrity: sha512-SEeaJLb3qBNF/OaXnaR1NmmBbFYk1zC0ZH/52fATcRPLFg/p791YrcyFFy44Bo9sLaGuSuLp5Q6axbb/O+v/RA==}
     engines: {node: ^14.18.0 || >=16.0.0}
 
+  '@react-email/render@1.1.2':
+    resolution: {integrity: sha512-RnRehYN3v9gVlNMehHPHhyp2RQo7+pSkHDtXPvg3s0GbzM9SQMW4Qrf8GRNvtpLC4gsI+Wt0VatNRUFqjvevbw==}
+    engines: {node: '>=18.0.0'}
+    peerDependencies:
+      react: ^18.0 || ^19.0 || ^19.0.0-rc
+      react-dom: ^18.0 || ^19.0 || ^19.0.0-rc
+
   '@rolldown/pluginutils@1.0.0-beta.27':
     resolution: {integrity: sha512-+d0F4MKMCbeVUJwG96uQ4SgAznZNSq93I3V+9NHA4OpvqG8mRCpGdKmK8l/dl02h2CCDHwW2FqilnTyDcAnqjA==}
 
@@ -1029,6 +1048,9 @@ packages:
     cpu: [x64]
     os: [win32]
 
+  '@selderee/plugin-htmlparser2@0.11.0':
+    resolution: {integrity: sha512-P33hHGdldxGabLFjPPpaTxVolMrzrcegejx+0GxjrIb9Zv48D8yAIA/QTDR2dFl7Uz7urX8aX6+5bCZslr+gWQ==}
+
   '@shikijs/core@3.23.0':
     resolution: {integrity: sha512-NSWQz0riNb67xthdm5br6lAkvpDJRTgB36fxlo37ZzM2yq0PQFFzbd8psqC2XMPgCzo1fW6cVi18+ArJ44wqgA==}
 
@@ -1176,6 +1198,18 @@ packages:
 
   '@ungap/structured-clone@1.4.0':
     resolution: {integrity: sha512-1mEZtMKPM09vDmQt5y7YvmN2+DFTP7Tg0EWXdic8/C6VRnpb33e4ghisCIE3WZjsE2N8mf+QV1Zqh7ZFYLWInQ==}
+
+  '@upstash/core-analytics@0.0.10':
+    resolution: {integrity: sha512-7qJHGxpQgQr9/vmeS1PktEwvNAF7TI4iJDi8Pu2CFZ9YUGHZH4fOP5TfYlZ4aVxfopnELiE4BS4FBjyK7V1/xQ==}
+    engines: {node: '>=16.0.0'}
+
+  '@upstash/ratelimit@2.2.0':
+    resolution: {integrity: sha512-gSydXspG6TJKTh71/gGGv4IGDjD9rXglQfm2jAue2kh4bcfWtEAsG1NW4OqzZd/hubJPojsbOU6AMdS6Xqh0tQ==}
+    peerDependencies:
+      '@upstash/redis': ^1.38.2
+
+  '@upstash/redis@1.41.0':
+    resolution: {integrity: sha512-TIu9C1B0ToXQLXt2M1LQuGZ6nkMjOZPIdJyU0GGWKZToa/MvJF8x2IRDOPMIAw2BLGXGhi1aZr5AnhlXu4YLXg==}
 
   '@vercel/analytics@1.6.1':
     resolution: {integrity: sha512-oH9He/bEM+6oKlv3chWuOOcp8Y6fo6/PSro8hEkgCW3pu9/OiCXiUpRUogDh3Fs3LH2sosDrx8CxeOLBEE+afg==}
@@ -1634,6 +1668,10 @@ packages:
   deep-is@0.1.4:
     resolution: {integrity: sha512-oIPzksmTg4/MriiaYGO+okXDT7ztn/w3Eptv/+gSIdMdKsJo0u4CfYNFJPy+4SKMuCqGw2wxnA+URMg3t8a/bQ==}
 
+  deepmerge@4.3.1:
+    resolution: {integrity: sha512-3sUqbMEc77XqpdNO7FRyRog+eW3ph+GYCbj+rK+uYyRMuwsVy0rMiVtPn+QJlKFvWP/1PYpapqYn0Me2knFn+A==}
+    engines: {node: '>=0.10.0'}
+
   defu@6.1.7:
     resolution: {integrity: sha512-7z22QmUWiQ/2d0KkdYmANbRUVABpZ9SNYyH5vx6PZ+nE5bcC0l7uFvEfHlyld/HcGBFTL536ClDt3DEcSlEJAQ==}
 
@@ -1853,6 +1891,9 @@ packages:
   extend@3.0.2:
     resolution: {integrity: sha512-fjquC59cD7CyW6urNXK0FBufkZcoiGG80wTuPujX590cB5Ttln20E2UB4S/WARVqhXffZl2LNgS+gQdPIIim/g==}
 
+  fast-deep-equal@2.0.1:
+    resolution: {integrity: sha512-bCK/2Z4zLidyB4ReuIsvALH6w31YfAQDmXMqMx6FyfHqvBxtjC0eRumeSu4Bs3XtXwpyIywtSTrVT99BxY1f9w==}
+
   fast-deep-equal@3.1.3:
     resolution: {integrity: sha512-f3qQ9oQy9j2AhBe/H9VC91wLmKBCCU/gDOnKNAYG5hswO7BLKj09Hc5HYNz9cGI++xlpDCIgDaitVs03ATR84Q==}
 
@@ -2028,8 +2069,15 @@ packages:
   html-escaper@3.0.3:
     resolution: {integrity: sha512-RuMffC89BOWQoY0WKGpIhn5gX3iI54O6nRA0yC124NYVtzjmFWBIiFd8M0x+ZdX0P9R4lADg1mgP8C7PxGOWuQ==}
 
+  html-to-text@9.0.5:
+    resolution: {integrity: sha512-qY60FjREgVZL03vJU6IfMV4GDjGBIoOyvuFdpBDIX9yTlDw0TjxVBQp+P8NvpdIXNJvfWBTNul7fsAQJq2FNpg==}
+    engines: {node: '>=14'}
+
   html-void-elements@3.0.0:
     resolution: {integrity: sha512-bEqo66MRXsUGxWHV5IP0PUiAWwoEjba4VCzg0LjFJBpchPaTfyfCKTG6bc5F8ucKec3q5y6qOdGyYTSBEvhCrg==}
+
+  htmlparser2@8.0.2:
+    resolution: {integrity: sha512-GYdjWKDkbRLkZ5geuHs5NY1puJ+PXwP7+fHPRz06Eirsb9ugf6d8kkXav6ADhcODhFFPMIXyxkxSuMf3D6NCFA==}
 
   http-cache-semantics@4.3.0:
     resolution: {integrity: sha512-M5t5LlJpS1UHMjvwRQVdFHvPISGeLAxNcrWuJkeGh0KxsqCHZ1O3NXZU/8x7cD0BDcGW8kapxMKTvwlqrNkHkA==}
@@ -2189,6 +2237,9 @@ packages:
   kleur@4.1.5:
     resolution: {integrity: sha512-o+NO+8WrRiQEE4/7nwRJhN1HWpVmJm511pBHUxPLtp0BUISzlBplORYSmTclCnJvQq2tKu/sgl3xVpkc7ZWuQQ==}
     engines: {node: '>=6'}
+
+  leac@0.6.0:
+    resolution: {integrity: sha512-y+SqErxb8h7nE/fiEX07jsbuhrpO9lL8eca7/Y1nuWV2moNlXhyd59iDGcRf6moVyDMbmTNzL40SUyrFU/yDpg==}
 
   lenis@1.3.27:
     resolution: {integrity: sha512-QIHNH4LIfWyLfgH/5K0aTGZgyFJJ7GfHNcaH/AIgyKjb8gstLh5siNGvrVqz1w5ClLXzOvllBVk7vby8JzUVPQ==}
@@ -2576,6 +2627,9 @@ packages:
   parse5@8.1.1:
     resolution: {integrity: sha512-EcR/6WDcU7b2N3vQSxKALCk9lXGtUMQxXio008OEMBE0kavu/7JLfBEeFPzi43nMqVDSbEn3QCK+BMCc9zO//w==}
 
+  parseley@0.12.1:
+    resolution: {integrity: sha512-e6qHKe3a9HWr0oMRVDTRhKce+bRO8VGQR3NyVwcjwrbhMmFCX9KszEV35+rn4AdilFAq9VPxP/Fe1wC9Qjd2lw==}
+
   path-browserify@1.0.1:
     resolution: {integrity: sha512-b7uo2UCUOYZcnF/3ID0lulOJi/bafxa1xPe7ZPsammBSpjSWQkjNxlt635YGS2MiR9GjvuXCtz2emr3jbsz98g==}
 
@@ -2603,6 +2657,9 @@ packages:
 
   path-to-regexp@6.3.0:
     resolution: {integrity: sha512-Yhpw4T9C6hPpgPeA28us07OJeqZ5EzQTkbfwuhsUg0c237RomFoETJgmp2sa3F/41gfLE6G5cqcYwznmeEeOlQ==}
+
+  peberminta@0.9.0:
+    resolution: {integrity: sha512-XIxfHpEuSJbITd1H3EeQwpcZbTLHc+VVr8ANI9t5sit565tsI4/xK3KWTUFE2e6QiangUkh3B0jihzmGnNrRsQ==}
 
   piccolore@0.1.3:
     resolution: {integrity: sha512-o8bTeDWjE086iwKrROaDf31K0qC/BENdm15/uH9usSC/uZjJOKb2YGiVHfLY4GhwsERiPI1jmwI2XrA7ACOxVw==}
@@ -2785,6 +2842,9 @@ packages:
     peerDependencies:
       react: ^19.3.1
 
+  react-promise-suspense@0.3.4:
+    resolution: {integrity: sha512-I42jl7L3Ze6kZaq+7zXWSunBa3b1on5yfvUW6Eo/3fFOj6dZ5Bqmcd264nJbTK/gn1HjjILAjSwnZbV4RpSaNQ==}
+
   react-refresh@0.17.0:
     resolution: {integrity: sha512-z6F7K9bV85EfseRCp2bzrpyQ0Gkw1uLoCel9XBVWPg/TjRj94SkJzUTGfOa4bs7iJvBWtQG0Wq7wnI0syw3EBQ==}
     engines: {node: '>=0.10.0'}
@@ -2871,6 +2931,10 @@ packages:
     resolution: {integrity: sha512-Xf0nWe6RseziFMu+Ap9biiUbmplq6S9/p+7w7YXP/JBHhrUDDUhwa+vANyubuqfZWTveU//DYVGsDG7RKL/vEw==}
     engines: {node: '>=0.10.0'}
 
+  resend@4.8.0:
+    resolution: {integrity: sha512-R8eBOFQDO6dzRTDmaMEdpqrkmgSjPpVXt4nGfWsZdYOet0kqra0xgbvTES6HmCriZEXbmGk3e0DiGIaLFTFSHA==}
+    engines: {node: '>=18'}
+
   resolve-from@4.0.0:
     resolution: {integrity: sha512-pb/MYmXstAkysRFx8piNI1tGFNQIFA3vkE3Gq4EuA1dF6gHp/+vgZqsCGJapvy8N3Q+4o7FwvquPJcnZ7RYy4g==}
     engines: {node: '>=4'}
@@ -2925,6 +2989,9 @@ packages:
 
   scheduler@0.28.0:
     resolution: {integrity: sha512-juorfCmIkIw8tT+p5BXSm6PJjQF/ycEYmKyzURCIt/RaZIhL+PulbQ9Yu2z1HdOJDdqDTlxA1+xKBmHXJsczAw==}
+
+  selderee@0.11.0:
+    resolution: {integrity: sha512-5TF+l7p4+OsnP8BCCvSyZiSPc4x4//p5uPwK8TCnVPJYRmU2aYKMpOXvw8zM5a5JvuuCGN1jmsMwuU2W02ukfA==}
 
   semver@6.3.2:
     resolution: {integrity: sha512-GYrCADwpu6yV5OAvchkQ27Z5wwMxWAEMg5NNWjyHh/5DboFFqbdbvYNIvZouQpxXyeMPoTOh0vdPYKlf0ZswdQ==}
@@ -3667,12 +3734,12 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@astrojs/mdx@4.3.14(astro@5.18.2(@types/node@24.19.2)(@vercel/functions@2.2.13)(jiti@1.21.7)(rollup@4.68.2)(typescript@5.9.3)(yaml@2.9.1))':
+  '@astrojs/mdx@4.3.14(astro@5.18.2(@types/node@24.19.2)(@upstash/redis@1.41.0)(@vercel/functions@2.2.13)(jiti@1.21.7)(rollup@4.68.2)(typescript@5.9.3)(yaml@2.9.1))':
     dependencies:
       '@astrojs/markdown-remark': 6.3.11
       '@mdx-js/mdx': 3.1.1
       acorn: 8.19.0
-      astro: 5.18.2(@types/node@24.19.2)(@vercel/functions@2.2.13)(jiti@1.21.7)(rollup@4.68.2)(typescript@5.9.3)(yaml@2.9.1)
+      astro: 5.18.2(@types/node@24.19.2)(@upstash/redis@1.41.0)(@vercel/functions@2.2.13)(jiti@1.21.7)(rollup@4.68.2)(typescript@5.9.3)(yaml@2.9.1)
       es-module-lexer: 1.7.0
       estree-util-visit: 2.0.0
       hast-util-to-html: 9.0.6
@@ -3718,9 +3785,9 @@ snapshots:
       sitemap: 9.0.1
       zod: 4.6.7
 
-  '@astrojs/tailwind@6.0.2(astro@5.18.2(@types/node@24.19.2)(@vercel/functions@2.2.13)(jiti@1.21.7)(rollup@4.68.2)(typescript@5.9.3)(yaml@2.9.1))(tailwindcss@3.4.19(yaml@2.9.1))':
+  '@astrojs/tailwind@6.0.2(astro@5.18.2(@types/node@24.19.2)(@upstash/redis@1.41.0)(@vercel/functions@2.2.13)(jiti@1.21.7)(rollup@4.68.2)(typescript@5.9.3)(yaml@2.9.1))(tailwindcss@3.4.19(yaml@2.9.1))':
     dependencies:
-      astro: 5.18.2(@types/node@24.19.2)(@vercel/functions@2.2.13)(jiti@1.21.7)(rollup@4.68.2)(typescript@5.9.3)(yaml@2.9.1)
+      astro: 5.18.2(@types/node@24.19.2)(@upstash/redis@1.41.0)(@vercel/functions@2.2.13)(jiti@1.21.7)(rollup@4.68.2)(typescript@5.9.3)(yaml@2.9.1)
       autoprefixer: 10.6.2(postcss@8.5.32)
       postcss: 8.5.32
       postcss-load-config: 4.0.2(postcss@8.5.32)
@@ -3740,14 +3807,14 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@astrojs/vercel@8.2.11(astro@5.18.2(@types/node@24.19.2)(@vercel/functions@2.2.13)(jiti@1.21.7)(rollup@4.68.2)(typescript@5.9.3)(yaml@2.9.1))(react@19.3.1)(rollup@4.68.2)':
+  '@astrojs/vercel@8.2.11(astro@5.18.2(@types/node@24.19.2)(@upstash/redis@1.41.0)(@vercel/functions@2.2.13)(jiti@1.21.7)(rollup@4.68.2)(typescript@5.9.3)(yaml@2.9.1))(react@19.3.1)(rollup@4.68.2)':
     dependencies:
       '@astrojs/internal-helpers': 0.7.4
       '@vercel/analytics': 1.6.1(react@19.3.1)
       '@vercel/functions': 2.2.13
       '@vercel/nft': 0.30.3(rollup@4.68.2)
       '@vercel/routing-utils': 5.3.3
-      astro: 5.18.2(@types/node@24.19.2)(@vercel/functions@2.2.13)(jiti@1.21.7)(rollup@4.68.2)(typescript@5.9.3)(yaml@2.9.1)
+      astro: 5.18.2(@types/node@24.19.2)(@upstash/redis@1.41.0)(@vercel/functions@2.2.13)(jiti@1.21.7)(rollup@4.68.2)(typescript@5.9.3)(yaml@2.9.1)
       esbuild: 0.25.12
       tinyglobby: 0.2.17
     transitivePeerDependencies:
@@ -4317,6 +4384,14 @@ snapshots:
 
   '@pkgr/core@0.3.6': {}
 
+  '@react-email/render@1.1.2(react-dom@19.3.1(react@19.3.1))(react@19.3.1)':
+    dependencies:
+      html-to-text: 9.0.5
+      prettier: 3.9.10
+      react: 19.3.1
+      react-dom: 19.3.1(react@19.3.1)
+      react-promise-suspense: 0.3.4
+
   '@rolldown/pluginutils@1.0.0-beta.27': {}
 
   '@rollup/pluginutils@5.5.1(rollup@4.68.2)':
@@ -4404,6 +4479,11 @@ snapshots:
 
   '@rollup/rollup-win32-x64-msvc@4.68.2':
     optional: true
+
+  '@selderee/plugin-htmlparser2@0.11.0':
+    dependencies:
+      domhandler: 5.0.3
+      selderee: 0.11.0
 
   '@shikijs/core@3.23.0':
     dependencies:
@@ -4608,6 +4688,19 @@ snapshots:
       eslint-visitor-keys: 5.0.1
 
   '@ungap/structured-clone@1.4.0': {}
+
+  '@upstash/core-analytics@0.0.10':
+    dependencies:
+      '@upstash/redis': 1.41.0
+
+  '@upstash/ratelimit@2.2.0(@upstash/redis@1.41.0)':
+    dependencies:
+      '@upstash/core-analytics': 0.0.10
+      '@upstash/redis': 1.41.0
+
+  '@upstash/redis@1.41.0':
+    dependencies:
+      uncrypto: 0.1.3
 
   '@vercel/analytics@1.6.1(react@19.3.1)':
     optionalDependencies:
@@ -4838,7 +4931,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  astro@5.18.2(@types/node@24.19.2)(@vercel/functions@2.2.13)(jiti@1.21.7)(rollup@4.68.2)(typescript@5.9.3)(yaml@2.9.1):
+  astro@5.18.2(@types/node@24.19.2)(@upstash/redis@1.41.0)(@vercel/functions@2.2.13)(jiti@1.21.7)(rollup@4.68.2)(typescript@5.9.3)(yaml@2.9.1):
     dependencies:
       '@astrojs/compiler': 2.13.1
       '@astrojs/internal-helpers': 0.7.6
@@ -4893,7 +4986,7 @@ snapshots:
       ultrahtml: 1.7.0
       unifont: 0.7.5
       unist-util-visit: 5.2.0
-      unstorage: 1.17.6(@vercel/functions@2.2.13)
+      unstorage: 1.17.6(@upstash/redis@1.41.0)(@vercel/functions@2.2.13)
       vfile: 6.0.3
       vite: 6.4.6(@types/node@24.19.2)(jiti@1.21.7)(yaml@2.9.1)
       vitefu: 1.1.3(vite@6.4.6(@types/node@24.19.2)(jiti@1.21.7)(yaml@2.9.1))
@@ -5142,6 +5235,8 @@ snapshots:
       character-entities: 2.0.2
 
   deep-is@0.1.4: {}
+
+  deepmerge@4.3.1: {}
 
   defu@6.1.7: {}
 
@@ -5439,6 +5534,8 @@ snapshots:
 
   extend@3.0.2: {}
 
+  fast-deep-equal@2.0.1: {}
+
   fast-deep-equal@3.1.3: {}
 
   fast-glob@3.3.3:
@@ -5697,7 +5794,22 @@ snapshots:
 
   html-escaper@3.0.3: {}
 
+  html-to-text@9.0.5:
+    dependencies:
+      '@selderee/plugin-htmlparser2': 0.11.0
+      deepmerge: 4.3.1
+      dom-serializer: 2.0.0
+      htmlparser2: 8.0.2
+      selderee: 0.11.0
+
   html-void-elements@3.0.0: {}
+
+  htmlparser2@8.0.2:
+    dependencies:
+      domelementtype: 2.3.0
+      domhandler: 5.0.3
+      domutils: 3.2.2
+      entities: 4.5.0
 
   http-cache-semantics@4.3.0: {}
 
@@ -5818,6 +5930,8 @@ snapshots:
   kleur@3.0.3: {}
 
   kleur@4.1.5: {}
+
+  leac@0.6.0: {}
 
   lenis@1.3.27(react@19.3.1):
     optionalDependencies:
@@ -6467,6 +6581,11 @@ snapshots:
     dependencies:
       entities: 9.0.0
 
+  parseley@0.12.1:
+    dependencies:
+      leac: 0.6.0
+      peberminta: 0.9.0
+
   path-browserify@1.0.1: {}
 
   path-exists@4.0.0: {}
@@ -6485,6 +6604,8 @@ snapshots:
   path-to-regexp@6.1.0: {}
 
   path-to-regexp@6.3.0: {}
+
+  peberminta@0.9.0: {}
 
   piccolore@0.1.3: {}
 
@@ -6579,6 +6700,10 @@ snapshots:
     dependencies:
       react: 19.3.1
       scheduler: 0.28.0
+
+  react-promise-suspense@0.3.4:
+    dependencies:
+      fast-deep-equal: 2.0.1
 
   react-refresh@0.17.0: {}
 
@@ -6718,6 +6843,13 @@ snapshots:
 
   require-from-string@2.0.2: {}
 
+  resend@4.8.0(react-dom@19.3.1(react@19.3.1))(react@19.3.1):
+    dependencies:
+      '@react-email/render': 1.1.2(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
+    transitivePeerDependencies:
+      - react
+      - react-dom
+
   resolve-from@4.0.0: {}
 
   resolve-from@5.0.0: {}
@@ -6805,6 +6937,10 @@ snapshots:
   sax@1.6.1: {}
 
   scheduler@0.28.0: {}
+
+  selderee@0.11.0:
+    dependencies:
+      parseley: 0.12.1
 
   semver@6.3.2: {}
 
@@ -7128,7 +7264,7 @@ snapshots:
       unist-util-is: 6.0.1
       unist-util-visit-parents: 6.1.0
 
-  unstorage@1.17.6(@vercel/functions@2.2.13):
+  unstorage@1.17.6(@upstash/redis@1.41.0)(@vercel/functions@2.2.13):
     dependencies:
       anymatch: 3.1.3
       chokidar: 5.0.0
@@ -7139,6 +7275,7 @@ snapshots:
       ofetch: 1.5.1
       ufo: 1.6.4
     optionalDependencies:
+      '@upstash/redis': 1.41.0
       '@vercel/functions': 2.2.13
 
   update-browserslist-db@1.3.4(browserslist@4.29.5):

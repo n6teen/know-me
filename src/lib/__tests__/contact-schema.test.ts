@@ -57,6 +57,12 @@ describe('parseContactInput', () => {
       });
       expect(result.success).toBe(true);
     });
+
+    it('accepts missing website field (optional)', () => {
+      const { website: _, ...inputWithoutWebsite } = validInput;
+      const result = parseContactInput(inputWithoutWebsite);
+      expect(result.success).toBe(true);
+    });
   });
 
   describe('name validation', () => {

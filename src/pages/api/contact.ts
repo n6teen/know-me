@@ -20,17 +20,20 @@ function jsonResponse(body: Record<string, unknown>, status: number): Response {
 }
 
 function getClientIp(request: Request): string {
-  const cfIp = request.headers.get('cf-connecting-ip');
-  if (cfIp) return cfIp;
+  const vercelIp = request.headers.get('x-vercel-forwarded-for');
+  if (vercelIp) {
+    const first = vercelIp.split(',')[0]?.trim();
+    if (first) return first;
+  }
+
+  const realIp = request.headers.get('x-real-ip');
+  if (realIp) return realIp;
 
   const forwarded = request.headers.get('x-forwarded-for');
   if (forwarded) {
     const first = forwarded.split(',')[0]?.trim();
     if (first) return first;
   }
-
-  const realIp = request.headers.get('x-real-ip');
-  if (realIp) return realIp;
 
   return '127.0.0.1';
 }
@@ -63,15 +66,19 @@ export const POST: APIRoute = async ({ request }) => {
     return jsonResponse({ code: 'invalid_input', fields: {} }, 400);
   }
 
-  let body: unknown;
+  let body: Record<string, unknown>;
   try {
     const text = await request.text();
     if (text.length > MAX_BODY_SIZE) {
       return jsonResponse({ code: 'invalid_input', fields: {} }, 400);
     }
-    body = JSON.parse(text);
+    body = JSON.parse(text) as Record<string, unknown>;
   } catch {
     return jsonResponse({ code: 'invalid_input', fields: {} }, 400);
+  }
+
+  if (typeof body.website === 'string' && body.website.length > 0) {
+    return jsonResponse({ code: 'ok' }, 200);
   }
 
   const parsed = parseContactInput(body);
@@ -79,11 +86,7 @@ export const POST: APIRoute = async ({ request }) => {
     return jsonResponse({ code: 'invalid_input', fields: parsed.fields }, 400);
   }
 
-  const { name, email, message, locale, turnstileToken, website } = parsed.data;
-
-  if (website) {
-    return jsonResponse({ code: 'ok' }, 200);
-  }
+  const { name, email, message, locale, turnstileToken } = parsed.data;
 
   const clientIp = getClientIp(request);
 

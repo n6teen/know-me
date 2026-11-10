@@ -12,6 +12,16 @@ vi.mock('@/lib/rate-limit', () => ({
 vi.mock('@/lib/email', () => ({
   sendContactEmail: vi.fn(),
   escapeHtml: (text: string) => text,
+  stripControlChars: (text: string) => {
+    let result = '';
+    for (const char of text) {
+      const code = char.charCodeAt(0);
+      if (code >= 32 && code !== 127) {
+        result += char;
+      }
+    }
+    return result;
+  },
 }));
 
 import { POST } from '../contact';
@@ -229,6 +239,23 @@ describe('POST /api/contact', () => {
       expect(mockVerifyTurnstile).not.toHaveBeenCalled();
       expect(mockCheckRateLimit).not.toHaveBeenCalled();
     });
+
+    it('returns 200 ok when honeypot is filled even with invalid fields', async () => {
+      const request = createRequest({
+        name: '',
+        email: 'invalid-email',
+        message: 'short',
+        locale: 'invalid',
+        turnstileToken: '',
+        website: 'spam-bot-value',
+      });
+      const response = await POST(createContext(request));
+      const data = await response.json();
+
+      expect(response.status).toBe(200);
+      expect(data.code).toBe('ok');
+      expect(mockSendContactEmail).not.toHaveBeenCalled();
+    });
   });
 
   describe('rate limiting', () => {
@@ -366,13 +393,14 @@ describe('POST /api/contact', () => {
   });
 
   describe('client IP extraction', () => {
-    it('uses cf-connecting-ip header first', async () => {
+    it('uses x-vercel-forwarded-for header first', async () => {
       const request = new Request('https://example.com/api/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'cf-connecting-ip': '10.0.0.1',
-          'x-forwarded-for': '192.168.1.1',
+          'x-vercel-forwarded-for': '10.0.0.1',
+          'x-real-ip': '192.168.1.1',
+          'x-forwarded-for': '172.16.0.1',
         },
         body: JSON.stringify(validBody),
       });
@@ -386,7 +414,47 @@ describe('POST /api/contact', () => {
       );
     });
 
-    it('uses x-forwarded-for when cf-connecting-ip is absent', async () => {
+    it('ignores spoofed cf-connecting-ip header', async () => {
+      const request = new Request('https://example.com/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'cf-connecting-ip': '1.2.3.4',
+          'x-vercel-forwarded-for': '10.0.0.1',
+        },
+        body: JSON.stringify(validBody),
+      });
+
+      await POST(createContext(request));
+
+      expect(mockCheckRateLimit).toHaveBeenCalledWith(
+        '10.0.0.1',
+        expect.any(String),
+        expect.any(String)
+      );
+    });
+
+    it('uses x-real-ip when x-vercel-forwarded-for is absent', async () => {
+      const request = new Request('https://example.com/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-real-ip': '172.16.0.1',
+          'x-forwarded-for': '192.168.1.1',
+        },
+        body: JSON.stringify(validBody),
+      });
+
+      await POST(createContext(request));
+
+      expect(mockCheckRateLimit).toHaveBeenCalledWith(
+        '172.16.0.1',
+        expect.any(String),
+        expect.any(String)
+      );
+    });
+
+    it('uses x-forwarded-for as last resort', async () => {
       const request = new Request('https://example.com/api/contact', {
         method: 'POST',
         headers: {
@@ -400,25 +468,6 @@ describe('POST /api/contact', () => {
 
       expect(mockCheckRateLimit).toHaveBeenCalledWith(
         '192.168.1.1',
-        expect.any(String),
-        expect.any(String)
-      );
-    });
-
-    it('uses x-real-ip as fallback', async () => {
-      const request = new Request('https://example.com/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'x-real-ip': '172.16.0.1',
-        },
-        body: JSON.stringify(validBody),
-      });
-
-      await POST(createContext(request));
-
-      expect(mockCheckRateLimit).toHaveBeenCalledWith(
-        '172.16.0.1',
         expect.any(String),
         expect.any(String)
       );

@@ -6,7 +6,7 @@ export const contactSchema = z.object({
   message: z.string().min(10, 'too_short').max(5000, 'too_long'),
   locale: z.enum(['th', 'en']),
   turnstileToken: z.string().min(1),
-  website: z.string(),
+  website: z.string().optional(),
 });
 
 export type ContactInput = z.infer<typeof contactSchema>;
