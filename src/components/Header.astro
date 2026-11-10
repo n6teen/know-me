@@ -1,0 +1,165 @@
+---
+import { type Locale, createTranslator, getAlternateUrl, getLocalizedPath } from '@/i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = createTranslator(locale);
+const alternateLocale = locale === 'en' ? 'th' : 'en';
+const alternateUrl = getAlternateUrl(Astro.url, alternateLocale);
+
+const navItems = [
+  { href: getLocalizedPath('/', locale) + '#work', label: t('nav.work') },
+  { href: getLocalizedPath('/about', locale), label: t('nav.about') },
+  { href: '#contact', label: t('nav.contact') },
+];
+---
+
+<header
+  id="site-header"
+  class="duration-DEFAULT safe-top fixed left-0 right-0 top-0 z-50 transition-all ease-smooth"
+>
+  <nav
+    class="container flex items-center justify-between py-4 lg:py-6"
+    aria-label={locale === 'th' ? 'เมนูหลัก' : 'Main navigation'}
+  >
+    <a
+      href={getLocalizedPath('/', locale)}
+      class="font-display text-h3 font-bold tracking-tight transition-colors duration-fast hover:text-accent"
+      aria-label={locale === 'th' ? 'หน้าแรก' : 'Home'}
+    >
+      NOTE.
+    </a>
+
+    <div class="flex items-center gap-6 lg:gap-8">
+      <ul class="hidden items-center gap-6 md:flex lg:gap-8">
+        {
+          navItems.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                class="text-sm font-medium text-muted transition-colors duration-fast hover:text-text"
+              >
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+
+      <div class="flex items-center gap-4">
+        <a
+          href={alternateUrl}
+          class="px-2 py-1 text-sm font-medium text-muted transition-colors duration-fast hover:text-accent"
+          aria-label={locale === 'th' ? 'Switch to English' : 'เปลี่ยนเป็นภาษาไทย'}
+        >
+          {t('nav.switchLang')}
+        </a>
+
+        <button
+          type="button"
+          id="mobile-menu-btn"
+          class="p-2 text-muted transition-colors hover:text-text md:hidden"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+          aria-label={locale === 'th' ? 'เปิดเมนู' : 'Open menu'}
+        >
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div
+    id="mobile-menu"
+    class="bg-bg/95 duration-DEFAULT fixed inset-0 top-[60px] translate-x-full transform backdrop-blur-sm transition-transform ease-smooth md:hidden"
+    aria-hidden="true"
+  >
+    <ul class="container flex flex-col gap-6 py-8">
+      {
+        navItems.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              class="block font-display text-h3 font-semibold text-text transition-colors hover:text-accent"
+            >
+              {item.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</header>
+
+<script>
+  function initHeader() {
+    const header = document.getElementById('site-header');
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    if (!header || !mobileMenuBtn || !mobileMenu) return;
+
+    let isMenuOpen = false;
+
+    function updateHeader() {
+      if (!header) return;
+      const scrollY = window.scrollY;
+      const isScrolled = scrollY > 50;
+
+      header.classList.toggle('bg-bg/90', isScrolled);
+      header.classList.toggle('backdrop-blur-sm', isScrolled);
+      header.classList.toggle('border-b', isScrolled);
+      header.classList.toggle('border-line', isScrolled);
+    }
+
+    function toggleMenu() {
+      if (!mobileMenuBtn || !mobileMenu) return;
+      isMenuOpen = !isMenuOpen;
+      mobileMenuBtn.setAttribute('aria-expanded', String(isMenuOpen));
+      mobileMenu.setAttribute('aria-hidden', String(!isMenuOpen));
+
+      if (isMenuOpen) {
+        mobileMenu.classList.remove('translate-x-full');
+        document.body.style.overflow = 'hidden';
+      } else {
+        mobileMenu.classList.add('translate-x-full');
+        document.body.style.overflow = '';
+      }
+    }
+
+    function closeMenu() {
+      if (isMenuOpen) {
+        toggleMenu();
+      }
+    }
+
+    window.addEventListener('scroll', updateHeader, { passive: true });
+    mobileMenuBtn.addEventListener('click', toggleMenu);
+
+    mobileMenu.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', closeMenu);
+    });
+
+    updateHeader();
+  }
+
+  initHeader();
+  document.addEventListener('astro:page-load', initHeader);
+</script>

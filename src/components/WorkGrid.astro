@@ -1,0 +1,112 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import { type Locale, createTranslator } from '@/i18n';
+import ProjectCard from './ProjectCard.astro';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = createTranslator(locale);
+
+const allProjects = await getCollection('projects', ({ id }: { id: string }) => {
+  return id.endsWith(`/${locale}.mdx`);
+});
+
+type Project = CollectionEntry<'projects'>;
+
+interface ProjectItem {
+  project: Project;
+  slug: string;
+  delay: number;
+}
+
+const sortedProjects = allProjects.sort((a: Project, b: Project) => a.data.order - b.data.order);
+const largeProjects = sortedProjects.filter((p: Project) => p.data.size === 'large');
+const smallProjects = sortedProjects.filter((p: Project) => p.data.size === 'small');
+
+const largeItems: ProjectItem[] = largeProjects.map((project: Project, index: number) => ({
+  project,
+  slug: project.id.split('/')[0]!,
+  delay: index * 100,
+}));
+
+const smallItems: ProjectItem[] = smallProjects.map((project: Project, index: number) => ({
+  project,
+  slug: project.id.split('/')[0]!,
+  delay: (largeProjects.length + index) * 100,
+}));
+---
+
+<section id="work" class="py-24 lg:py-32" aria-labelledby="work-heading">
+  <div class="container mb-12 lg:mb-16">
+    <header class="reveal">
+      <h2 id="work-heading" class="mb-4 font-display text-h2">
+        {t('work.title')}
+      </h2>
+      <p class="text-base text-muted lg:text-h3">
+        {t('work.subtitle')}
+      </p>
+    </header>
+  </div>
+
+  {/* Full-bleed work grid with divider lines */}
+  <div class="full-bleed border-t" style="border-color: var(--color-line);">
+    {/* Large projects - 2 columns on desktop */}
+    <div class="grid grid-cols-1 lg:grid-cols-2">
+      {
+        largeItems.map((item: ProjectItem, index: number) => (
+          <div
+            class="reveal border-b lg:border-r"
+            style={`
+              transition-delay: ${item.delay}ms;
+              border-color: var(--color-line);
+              ${index % 2 === 1 ? 'border-right: none;' : ''}
+            `}
+          >
+            <ProjectCard project={item.project} slug={item.slug} locale={locale} size="large" />
+          </div>
+        ))
+      }
+    </div>
+
+    {/* Small projects - 2 columns */}
+    <div class="grid grid-cols-1 md:grid-cols-2">
+      {
+        smallItems.map((item: ProjectItem, index: number) => (
+          <div
+            class="reveal border-b md:border-r"
+            style={`
+              transition-delay: ${item.delay}ms;
+              border-color: var(--color-line);
+              ${index % 2 === 1 ? 'border-right: none;' : ''}
+            `}
+          >
+            <ProjectCard project={item.project} slug={item.slug} locale={locale} size="small" />
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Remove bottom border from last row */
+  .grid > div:last-child {
+    border-bottom: none;
+  }
+
+  /* For 2-column layout, remove border from second-to-last if it's in the last row */
+  @media (min-width: 768px) {
+    .grid.grid-cols-2 > div:nth-last-child(2):nth-child(odd) {
+      border-bottom: none;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .grid.lg\\:grid-cols-2 > div:nth-last-child(2):nth-child(odd) {
+      border-bottom: none;
+    }
+  }
+</style>

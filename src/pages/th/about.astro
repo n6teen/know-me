@@ -1,0 +1,15 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import AboutSection from '@/components/AboutSection.astro';
+
+const locale = 'th' as const;
+const title = 'เกี่ยวกับโน้ต — Software Engineer | กรุงเทพฯ';
+const description =
+  'โน้ตเป็น Software Engineer ที่ ODDS ทำงานในทีม Scrum ที่ดูแลทั้ง UX/UI, frontend และ backend จบวิศวกรรมคอมพิวเตอร์ เกียรตินิยม จาก มทส.';
+---
+
+<BaseLayout title={title} description={description}>
+  <div class="pt-24 lg:pt-32">
+    <AboutSection locale={locale} />
+  </div>
+</BaseLayout>

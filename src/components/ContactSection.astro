@@ -1,0 +1,27 @@
+---
+import { type Locale, createTranslator } from '@/i18n';
+import ContactForm from './ContactForm';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = createTranslator(locale);
+---
+
+<section id="contact" class="py-24 lg:py-32" aria-labelledby="contact-heading">
+  <div class="container">
+    <div class="grid-layout">
+      <div class="col-span-12 lg:col-span-8 lg:col-start-3">
+        <h2 id="contact-heading" class="reveal mb-8 font-display text-h2">
+          {t('contact.title')}
+        </h2>
+
+        <div class="reveal" style="transition-delay: 100ms;">
+          <ContactForm locale={locale} client:visible />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

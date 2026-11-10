@@ -1,0 +1,17 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Hero from '@/components/Hero.astro';
+import WorkGrid from '@/components/WorkGrid.astro';
+import AboutSection from '@/components/AboutSection.astro';
+
+const locale = 'th' as const;
+const title = 'โน้ต — Software Engineer | กรุงเทพฯ';
+const description =
+  'สวัสดีค่ะ โน้ตเอง Software Engineer ที่ดูแลงานได้ตั้งแต่ user flow จนถึง backend สร้างเว็บที่สมดุลทั้งความต้องการของผู้ใช้ เป้าหมายธุรกิจ และโค้ดที่ดูแลต่อได้ง่าย';
+---
+
+<BaseLayout title={title} description={description}>
+  <Hero locale={locale} />
+  <WorkGrid locale={locale} />
+  <AboutSection locale={locale} />
+</BaseLayout>

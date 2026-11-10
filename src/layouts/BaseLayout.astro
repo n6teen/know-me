@@ -1,0 +1,89 @@
+---
+import { ClientRouter } from 'astro:transitions';
+import '../styles/global.css';
+import { type Locale, getLocaleFromUrl, getAlternateUrl } from '@/i18n';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import MotionInit from '@/components/MotionInit.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  noindex?: boolean;
+}
+
+const { title, description, image = '/og-image.png', noindex = false } = Astro.props;
+
+const locale = getLocaleFromUrl(Astro.url) as Locale;
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+
+    <link rel="canonical" href={canonicalUrl.href} />
+    <link
+      rel="alternate"
+      hreflang="en"
+      href={new URL(getAlternateUrl(Astro.url, 'en'), Astro.site).href}
+    />
+    <link
+      rel="alternate"
+      hreflang="th"
+      href={new URL(getAlternateUrl(Astro.url, 'th'), Astro.site).href}
+    />
+    <link rel="alternate" hreflang="x-default" href={new URL('/en/', Astro.site).href} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl.href} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(image, Astro.site).href} />
+    <meta property="og:locale" content={locale === 'th' ? 'th_TH' : 'en_US'} />
+    <meta property="og:locale:alternate" content={locale === 'th' ? 'en_US' : 'th_TH'} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalUrl.href} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(image, Astro.site).href} />
+
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <link
+      rel="preload"
+      href="/@fontsource/space-grotesk/files/space-grotesk-latin-600-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+
+    <ClientRouter />
+  </head>
+  <body class="safe-area-inset">
+    <a href="#main-content" class="skip-link">
+      {locale === 'th' ? 'ข้ามไปยังเนื้อหาหลัก' : 'Skip to main content'}
+    </a>
+
+    <Header locale={locale} />
+
+    <main id="main-content" tabindex="-1">
+      <slot />
+    </main>
+
+    <Footer locale={locale} />
+
+    <MotionInit />
+  </body>
+</html>

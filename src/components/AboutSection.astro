@@ -1,0 +1,84 @@
+---
+import { type Locale, createTranslator } from '@/i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = createTranslator(locale);
+
+const skills = [
+  'React',
+  'TypeScript',
+  'JavaScript',
+  'HTML',
+  'CSS',
+  'Tailwind',
+  'Ant Design',
+  'Node.js',
+  'Go',
+  'REST',
+  'SQLite',
+  'PostgreSQL',
+  'MySQL',
+  'Git',
+  'Figma',
+  'SonarQube',
+  'Jest',
+  'Playwright',
+  'Jenkins',
+];
+
+const cvPath = locale === 'th' ? '/cv/cv-th.pdf' : '/cv/cv-en.pdf';
+---
+
+<section id="about" class="bg-surface py-24 lg:py-32" aria-labelledby="about-heading">
+  <div class="container">
+    <div class="grid-layout">
+      <div class="col-span-12 lg:col-span-8 lg:col-start-3">
+        <div class="reveal">
+          <h2 id="about-heading" class="sr-only">
+            {locale === 'th' ? 'เกี่ยวกับโน้ต' : 'About Note'}
+          </h2>
+
+          <p class="mb-8 font-display text-h3 font-semibold text-text lg:text-h2">
+            {t('about.intro')}
+          </p>
+
+          <div class="mb-8 flex flex-wrap gap-2">
+            {
+              skills.map((skill, index) => (
+                <span
+                  class="rounded-button border border-line bg-bg px-4 py-2 text-sm text-muted transition-colors duration-fast hover:border-accent hover:text-accent"
+                  style={`transition-delay: ${index * 20}ms`}
+                >
+                  {skill}
+                </span>
+              ))
+            }
+          </div>
+
+          <a href={cvPath} download class="btn btn-primary inline-flex items-center gap-2">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            {t('about.downloadCv')}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,25 @@
+---
+title: 'Blocktrade System – Repeat Order & Iceberg Order'
+summary: 'ระบบ block trading สำหรับนักลงทุนสถาบัน พร้อมฟีเจอร์คำสั่งซื้อขายขั้นสูง'
+role: 'พัฒนาฟีเจอร์ frontend และแก้บั๊ก backend สร้างฟีเจอร์ Repeat Order และ Iceberg Order'
+stack:
+  - React
+  - TypeScript
+  - Go
+  - PostgreSQL
+  - REST APIs
+order: 2
+size: large
+---
+
+## โจทย์
+
+นักเทรดสถาบันต้องการประเภทคำสั่งซื้อขายที่ซับซ้อนกว่าคำสั่ง market และ limit ปกติ โดยเฉพาะฟังก์ชัน Repeat Order สำหรับการเทรดซ้ำๆ และ Iceberg Order สำหรับส่งคำสั่งขนาดใหญ่โดยไม่เปิดเผยขนาดเต็มให้ตลาดรู้
+
+## วิธีคิดและวิธีทำ
+
+โน้ตทำงานทั้ง frontend และ backend ของ trading platform ที่ใช้งานจริง ฝั่ง frontend พัฒนา interface ที่ใช้งานง่ายสำหรับตั้งค่าคำสั่งซื้อขายขั้นสูง ฝั่ง backend แก้บั๊กและดูแลให้ logic การส่งคำสั่งมีความน่าเชื่อถือและ performant
+
+## ผลลัพธ์
+
+ส่งมอบฟีเจอร์ Repeat Order และ Iceberg Order ขึ้น production ได้สำเร็จ ช่วยให้นักเทรดสถาบันดำเนินกลยุทธ์ได้อย่างมีประสิทธิภาพมากขึ้น พร้อมรักษาความเป็นส่วนตัวในตลาด

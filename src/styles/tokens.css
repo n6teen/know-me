@@ -1,0 +1,129 @@
+/*
+ * Design Tokens
+ * =============
+ * ALL visual styling tokens are defined here as CSS custom properties.
+ * To restyle the site, edit ONLY this file.
+ *
+ * Tailwind config references these variables, so changes here
+ * automatically propagate to all utility classes and components.
+ */
+
+:root {
+  /* ═══════════════════════════════════════════════════════════════════════════
+   * COLORS
+   * ═══════════════════════════════════════════════════════════════════════════ */
+  --color-bg: #0a0a0b;
+  --color-surface: #121821;
+  --color-line: #232b36;
+  --color-text: #e6edf3;
+  --color-muted: #8b98a5;
+
+  /* Accent colors */
+  --color-accent: #2340d8; /* Cobalt - buttons, marquee, card badges */
+  --color-on-accent: #ffffff; /* Text on accent backgrounds */
+  --color-accent-text: #7b93ff; /* Links, emphasized text, focus ring on dark bg */
+  --color-glow: #e8a33d; /* Warm amber - 3D hero, gradient behind covers (not for text) */
+
+  /* Semantic colors for form states */
+  --color-error: #ef4444;
+  --color-error-light: #f87171;
+  --color-error-dark: #7f1d1d;
+  --color-success: #22c55e;
+  --color-success-light: #86efac;
+  --color-success-dark: #14532d;
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+   * TYPOGRAPHY - Font Families
+   * ═══════════════════════════════════════════════════════════════════════════ */
+  --font-display: 'Space Grotesk', 'Kanit', sans-serif;
+  --font-body: 'IBM Plex Sans Thai', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+   * TYPOGRAPHY - Type Scale
+   * ═══════════════════════════════════════════════════════════════════════════ */
+  --text-hero: clamp(2.75rem, 8vw, 7rem);
+  --text-h2: clamp(2rem, 4vw, 3.5rem);
+  --text-h3: 1.5rem;
+  --text-base: 1rem;
+  --text-sm: 0.875rem;
+  --text-xs: 0.75rem;
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+   * TYPOGRAPHY - Line Heights
+   * ═══════════════════════════════════════════════════════════════════════════ */
+  --lh-display: 1;
+  --lh-body: 1.6;
+  --lh-tight: 1.25;
+  --lh-relaxed: 1.5;
+  --lh-loose: 1.4;
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+   * TYPOGRAPHY - Heading Style (Kinetic Grid style)
+   * Letter case is controlled in i18n copy, not CSS (accessibility)
+   * ═══════════════════════════════════════════════════════════════════════════ */
+  --heading-weight: 700;
+  --heading-letter-spacing: -0.02em;
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+   * SPACING SCALE (in pixels, used as rem in Tailwind)
+   * 4, 8, 12, 16, 24, 32, 48, 64, 96, 128
+   * ═══════════════════════════════════════════════════════════════════════════ */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-24: 96px;
+  --space-32: 128px;
+
+  /* Layout */
+  --container-max: 1280px;
+  --gutter: 24px;
+  --grid-divider: 1px;
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+   * BORDER RADIUS
+   * ═══════════════════════════════════════════════════════════════════════════ */
+  --radius-card: 0;
+  --radius-button: 999px;
+  --radius-full: 9999px;
+  --radius-input: 16px;
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+   * MOTION - Durations
+   * ═══════════════════════════════════════════════════════════════════════════ */
+  --duration-fast: 200ms;
+  --duration-default: 300ms;
+  --duration-slow: 600ms;
+  --duration-marquee: 30s;
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+   * MOTION - Easing
+   * ═══════════════════════════════════════════════════════════════════════════ */
+  --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+   * FOCUS RING
+   * ═══════════════════════════════════════════════════════════════════════════ */
+  --focus-ring-width: 2px;
+  --focus-ring-offset: 2px;
+  --focus-ring-color: var(--color-accent-text);
+}
+
+/* Thai language overrides - different line height and heavier heading weight */
+:root:lang(th),
+:lang(th) {
+  --lh-display: 1.25;
+  --heading-weight: 800;
+}
+
+/* Mobile gutter adjustment */
+@media (max-width: 768px) {
+  :root {
+    --gutter: 16px;
+  }
+}
