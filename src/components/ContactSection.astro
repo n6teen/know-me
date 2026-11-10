@@ -14,11 +14,11 @@ const t = createTranslator(locale);
   <div class="container">
     <div class="grid-layout">
       <div class="col-span-12 lg:col-span-8 lg:col-start-3">
-        <h2 id="contact-heading" class="reveal mb-8 font-display text-h2">
+        <h2 id="contact-heading" data-reveal class="mb-8 font-display text-h2">
           {t('contact.title')}
         </h2>
 
-        <div class="reveal" style="transition-delay: 100ms;">
+        <div data-reveal style="transition-delay: 100ms;">
           <ContactForm locale={locale} client:visible />
         </div>
       </div>

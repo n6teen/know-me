@@ -91,7 +91,7 @@
   --radius-card: 0;
   --radius-button: 999px;
   --radius-full: 9999px;
-  --radius-input: 16px;
+  --radius-input: 0;
 
   /* ═══════════════════════════════════════════════════════════════════════════
    * MOTION - Durations

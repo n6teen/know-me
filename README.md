@@ -36,12 +36,21 @@ pnpm preview
 
 ### Environment Variables
 
-Create a `.env` file in the root directory:
+Create a `.env` file in the root directory (see `.env.example`):
 
 ```env
 # Cloudflare Turnstile site key for contact form spam protection
 PUBLIC_TURNSTILE_SITE_KEY=your_turnstile_site_key
+
+# Site URL for canonical links and sitemaps (e.g. https://yourdomain.com)
+# Used by Astro's site config for SEO, canonical URLs, and OG tags
+PUBLIC_SITE_URL=https://example.com
 ```
+
+| Variable | Required | Description |
+| --- | --- | --- |
+| `PUBLIC_TURNSTILE_SITE_KEY` | Production | Cloudflare Turnstile site key for spam protection |
+| `PUBLIC_SITE_URL` | Production | Full site URL for canonical links and OG tags |
 
 ## Project Structure
 

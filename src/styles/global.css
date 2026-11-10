@@ -1,11 +1,10 @@
 /* Design tokens - edit tokens.css for visual changes */
 @import './tokens.css';
 
-/* Fonts - Space Grotesk (display), Kanit (Thai fallback), IBM Plex Sans Thai (body), JetBrains Mono */
+/* Fonts - Space Grotesk (display 600/700 max avail), Kanit (Thai fallback 600/800), IBM Plex Sans Thai (body), JetBrains Mono */
 @import '@fontsource/space-grotesk/600.css';
 @import '@fontsource/space-grotesk/700.css';
 @import '@fontsource/kanit/600.css';
-@import '@fontsource/kanit/700.css';
 @import '@fontsource/kanit/800.css';
 @import '@fontsource/ibm-plex-sans-thai/400.css';
 @import '@fontsource/ibm-plex-sans-thai/600.css';
@@ -165,12 +164,17 @@
     border-color: var(--color-accent-text);
   }
 
-  .reveal {
+  /*
+   * Progressive reveal: content visible by default for accessibility.
+   * Only hide elements when JS is available (.js class on <html>).
+   */
+  .js [data-reveal] {
     opacity: 0;
     transform: translateY(30px);
   }
 
-  .reveal.revealed {
+  [data-reveal].revealed,
+  .js [data-reveal].revealed {
     opacity: 1;
     transform: translateY(0);
     transition:
@@ -179,7 +183,7 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .reveal {
+    .js [data-reveal] {
       opacity: 1;
       transform: none;
     }

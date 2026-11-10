@@ -27,7 +27,7 @@ const navItems = [
   >
     <a
       href={getLocalizedPath('/', locale)}
-      class="font-display text-h3 font-bold tracking-tight transition-colors duration-fast hover:text-accent"
+      class="font-display text-h3 font-bold tracking-tight transition-colors duration-fast hover:text-accent-text"
       aria-label={locale === 'th' ? 'หน้าแรก' : 'Home'}
     >
       NOTE.
@@ -52,7 +52,7 @@ const navItems = [
       <div class="flex items-center gap-4">
         <a
           href={alternateUrl}
-          class="px-2 py-1 text-sm font-medium text-muted transition-colors duration-fast hover:text-accent"
+          class="px-2 py-1 text-sm font-medium text-muted transition-colors duration-fast hover:text-accent-text"
           aria-label={locale === 'th' ? 'Switch to English' : 'เปลี่ยนเป็นภาษาไทย'}
         >
           {t('nav.switchLang')}
@@ -97,7 +97,7 @@ const navItems = [
           <li>
             <a
               href={item.href}
-              class="block font-display text-h3 font-semibold text-text transition-colors hover:text-accent"
+              class="block font-display text-h3 font-semibold text-text transition-colors hover:text-accent-text"
             >
               {item.label}
             </a>
